@@ -1,0 +1,49 @@
+
+1. GNU/Linux o derivados (como MacOS)
+=================================================
+
+Sólo ejecuta 
+
+make install DIR_TESIS=ruta/a/tu/directorio/tesis
+
+este comando se encargará de colocar las librerias
+necesarias en su lugar ($HOME/textmf) y copiará las figuras
+necesarias a DIR_TESIS.
+
+La documentación se colocará en $HOME/texmf/doc/pcftesis
+
+
+2. Windows
+=================================================
+
+Aqui la situación deberá ser un poco mas tediosa.
+
+Para obtener el archivo de la clase teclea
+
+latex pcftesis.ins
+
+luego para generar la documentación
+
+latex pcftesis.dtx
+latex pcftesis.dtx
+
+
+Acto seguido, lee la documentación y luego copia los
+archivos pcftesis.cls, Makefile, todonotes.sty, changes.sty
+y acronym.sty  a la carpeta donde tengas la tesis. Además copia la carpeta
+figuras al mismo lugar (toda la carpeta). Por 'ultimo copia
+el contenido de la carpeta texlive-flexbib (sin los
+subdirectorios, i.e. solo los archivos) a la misma carpeta
+de la tesis.
+
+Listo!
+
+
+¡Mucha suerte con tu tesis!
+
+
+
+Adolfo De Unánue
+
+
+
