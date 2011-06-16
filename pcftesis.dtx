@@ -1,0 +1,2305 @@
+% \iffalse meta-comment
+% 
+%    Copyright (C) 2009   by Adolfo De Unánue
+%
+%    This file is part of pcftesis.
+%
+%    pcftesis is free software: you can redistribute it and/or modify
+%    it under the terms of the GNU General Public License as published by
+%    the Free Software Foundation, either version 3 of the License, or
+%    (at your option) any later version.
+%
+%    pcftesis is distributed in the hope that it will be useful,
+%    but WITHOUT ANY WARRANTY; without even the implied warranty of
+%    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%    GNU General Public License for more details.
+%
+%    You should have received a copy of the GNU General Public License
+%    along with pcftesis.  If not, see <http://www.gnu.org/licenses/>.
+%
+%
+%
+% \fi
+%
+%
+%  \CheckSum{1886}
+%  \CharacterTable
+%   {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%    Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%    Digits        \0\1\2\3\4\5\6\7\8\9
+%    Exclamation   \!     Double quote  \"     Hash (number) \#
+%    Dollar        \$     Percent       \%     Ampersand     \&
+%    Acute accent  \'     Left paren    \(     Right paren   \)
+%    Asterisk      \*     Plus          \+     Comma         \,
+%    Minus         \-     Point         \.     Solidus       \/
+%    Colon         \:     Semicolon     \;     Less than     \<
+%    Equals        \=     Greater than  \>     Question mark \?
+%    Commercial at \@     Left bracket  \[     Backslash     \\
+%    Right bracket \]     Circumflex    \^     Underscore    \_
+%    Grave accent  \`     Left brace    \{     Vertical bar  \|
+%    Right brace   \}     Tilde         \~}
+%
+% \changes{v0.5}{2009/03/17}{Versi\'on inicial}
+% \changes{v1.0.5}{2009/04/14}{flexbib en lugar de |natbib|,
+% ya que esta no traduc\'a al espa\~ol}
+% \changes{v1.0.6}{2009/04/16}{Se elimin\'o la
+% bibliograf\'ia por cap\'itulo debido a varios bugs e inconsistencias.}
+%
+% \iffalse (Don't show this in the doc).
+%    \begin{macrocode}
+%<*driver>
+\ProvidesFile{pcftesis.dtx}
+\documentclass{ltxdoc}
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{1}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[spanish]{babel}
+\RequirePackage{url}
+\DeclareRobustCommand{\pcftesis}{%
+         \textsf{pcftesis}}
+\providecommand{\dissfileversion}{1.0.6}
+\providecommand{\dissfiledate}{2009/04/17}
+\DisableCrossrefs
+\CodelineNumbered
+\RecordChanges
+\begin{document}
+    \DocInput{pcftesis.dtx}
+\end{document}
+%</driver>
+%    \end{macrocode}
+% \fi
+%
+% \title{\pcftesis\/ \thanks{Version~\dissfileversion,%
+%        con fecha~\dissfiledate.}}
+%
+% \author{Adolfo De Un\'anue \\ \texttt{adolfo@nucleares.unam.mx}}
+% \date{\dissfiledate}
+%
+% \maketitle
+%
+% \begin{abstract}
+% La clase \pcftesis\space está basada en la clase estándar
+% de \LaTeXe\/: \textsf{book} y a tomado ideas de varios
+% lugares (ver la sección de agradecimientos). Esta clase
+% genera una tesis de  doctorado o maestría siguiendo los
+% lineamientos del PCF,  además genera la documentación para
+% inicio de trámites de  solicitud de examen de grado. 
+% \end{abstract}
+%
+% \tableofcontents
+%  \setlength{\parskip}{1.3ex plus 0.2ex minus 0.2ex}
+%  \setlength{\parindent}{0pt}
+% \section{Introducción}
+% \label{sec:intro}
+% Espero que esta clase sirva de ayuda a toda las personas
+% que est\'an por titularse o que van a iniciar su trabajo
+% de tesis. El objetivo de \pcftesis\space es muy sencillo
+% ayudarte a concentrarte solamente en escribir y no estar
+% batallando con como hacer bonita la car\'atula de la tesis
+% o como obtener esto o lo otro funcionando. As\'i que,
+% conc\'entrate en tu investigaci\'on, lee la
+% documentaci\'on que tienes enfrente\footnote{El siempre
+% bien apreciado consejo de |RTFM|}  y deja que yo trate de
+% encargarme del resto.
+%
+% \subsection{Aviso}
+% \label{sec:disclaimer}
+% Es importante tener en cuenta que sólo \emph{Tu} eres
+% responsable de obtener un formato correcto de tu documento
+% de tesis aún cuando este clase simplifica la tarea
+% bastante.  De esta manera, nadie excepto tu (el usuario) acepta la
+% responsabilidad por trabajos que no sean aceptados por el
+% PCF-UNAM. El uso de la clase \pcftesis\space
+% implícitamente implica la aceptación de esta
+% política. Dicho esto, el documento producido usando esta
+% clase (descrito en las secciones venideras) siguiendo las
+% instrucciones tiene altas probabilidades de ser aceptado
+% por el PCF-UNAM sin modificaciones exageradas.
+%
+% \subsection{D\'onde encontrar la última versión}
+% Esta clase se puede encontrar en varios lugares, una es en
+% mi página personal:  \url{http://nano.dialetheia.net}, la
+% otra opci\'on es la p\'agina del PCF en su secci\'on de
+% egresos:
+% \url{http://www.posgrado.fisica.unam.mx/egreso.php}, adem\'as
+% se puede descargar desde  \textbf{Google Code}:
+% \url{http://code.google.com/p/pcftesis/}.
+%
+% \subsection{Dependencias y Limitaciones}
+% \label{sec:deps}
+% Esta clase depende de varios paquetes que están presentes
+% en el árbol |TEXTMF| o en el \emph{path} de búsqueda de
+% \LaTeX\space de una distribución |Ubuntu| o |Debian| (ya
+% que ha sido probada únicamente en estas distribuciones)
+% i.e.\ con un |TeXLive 2007|. Una
+% lista de los paquetes necesarios se encuentra en la
+% sección \ref{sec:features}. 
+%
+% A pesar de todo, existen dos paquetes que no son parte de
+% la distribuciones mencionadas arriba: |todonotes| y
+% |changes| ambos se encuentran en el archivo |tar|.
+%
+% Esta clase es limitada en el sentido de que producirá un
+% documento aceptable con los paquetes incluidos que
+% consideré útiles. Existen muchos otros paquetes que quizá
+% encuentres útiles y que será necesario modificar
+% acordemente. Para ver una lista de bugs conocidos vease \ref{sec:bugs}.
+%
+% \section{Instalación}
+% Teclea \texttt{make install DIR\_TESIS=/ruta/a/tu/carpeta/de/tesis} 
+% luego de descomprimir el 
+% archivo comprimido que contiene la clase. Esto copiará los
+% archivos requeridos a $\mathtt{\$HOME/texfm}$. Además copiará
+% el directorio conteniendo los escudos a tu directorio
+% donde esté la tesis (|DIR_TESIS|). A diferencia de
+% versiones anteriores no hay que hacer nada más
+% \footnote{Agradezco a F. Nettel por esta sugerencia.}.
+%
+% \section{Uso}
+% La clase \pcftesis\space puede ser usada en versiones de
+% \LaTeXe\space o superior, tecleando
+% |\documentclass|\oarg{options}|{pcftesis}| al inicio de tu
+% archivo fuente principal de \LaTeX\space
+% beginning of your \LaTeX\space. Las opciones disponibles
+% de esta clase serán discutidas en el sección
+% \ref{subsec:options}. Probablemente tengas que borrar
+% todos los paquetes que ya estes usando (i.e.\ los comandos
+% |usepackage|) ya que esta clase se encarga de importarlos,
+% consulta \ref{sec:features} para ver cuales son importados
+% por |pcftesis|. Se recomienda consultar
+% \url{http://www.ctan.org/tex-archive/help/Catalogue/alpha.html} 
+% para poder utilizar óptimamente los paquetes importados (o
+% por lo menos estudiar el archivo |tesis.tex| generado con
+% esta documentación).  
+%
+% \subsection{Opciones}
+% \label{subsec:options}
+% Por default, todos los documentos generados con esta clase
+% estarán formateados como tesis doctoral |phd| en tamaño
+% |letterpaper| (carta) \footnote{Esta opción en particular
+% no se puede cambiar}  y  |twosided| (impresos por ambos
+% lados) con un espaciado  entre líneas |sencillo| y como
+% una versión |final|, además  incluirán una licencia tipo
+% |cc| (i.e.\ creative commons)  share-alike (ver
+% \url{http://creativecommons.com}). 
+% 
+% 
+% \DescribeMacro{draft}\DescribeMacro{final}
+% Usando la opción |draft| habilitará la opción {\it draft} 
+% la clase |book| haciendo así el proceso del documento más
+% rápido. Entre los cambios provocados por la clase |book|
+% está que las imágenes dejaran de mostrarse, apareciendo únicamente 
+% su posición y su nombre. Otros cambios serán provocados
+% por la clase \pcftesis\space: usando el paquete |showkeys|
+% mostrará todas las referencias, ecuaciones, etiquetas y
+% citas con sus leyendas (|label|) tanto en el documento
+% como en la bibliografía, habilitará el mostrado de cambios
+% hechos por los autores (generalmente el alumno y el
+% director de tesis), mostrará también pequeñas notas al
+% margen que permitirán comunicar ciertas observaciones a
+% uno mismo o a otros autores (usando el paquete
+% |todonotes|/|fixme|, ver más abajo) y además desplegará
+% una leyenda de BORRADOR gracias al paquete
+% |draftcopy|.Todo esto con el objetivo de ayudarte a seguir
+% los cambios y correcciones por todo el comité tutoral
+% durante el proceso de escritura de tu trabajo de tesis. La
+% opción |final| también será pasada a la clase |book| y
+% deshabilitará todo lo anterior.
+%
+%
+%
+% \DescribeMacro{10pt,11pt,12pt}
+% Diferentes tamaños de letra para el documento. Son las
+% estándar de la clase |book|. Se recomienda ampliamente |11pt|.
+%
+% \DescribeMacro{phd,ms}                                             
+% Indican si el documento es una tesis doctoral |phd| o una
+% de maestría |ms|. Esto afectará principalmente la portada
+% y el número de sinodales necesarios para el examen.
+%
+% \DescribeMacro{adornado,semi,simple}
+% Manera en la que se presentarán la primera hoja del
+% capítulo. Actualmente los requisitos impuestos sobre el
+% documento de tesis en el PCF son muy laxos y permiten
+% esto. Es recomendable ver los tres para ver cual es el de
+% tu agrado.
+%
+% \DescribeMacro{noencab, encabcentrados, encabalternados}
+% Estas opciones controlan la apariencia de los encabezados
+% y pies de página de las hojas del cuerpo principal del
+% documento de tesis: |noencab| no muestra encabezados,
+% |encabcentrados| muestra encabezados sencillos al centro
+% de las páginas, y |encabalternados| coloca los encabezados
+% en las orillas dependiendo de si es página par o impar.
+%
+% \DescribeMacro{lof,lot,loc,los}
+% La elección de estas opciones provoca la aparición de
+% diferentes listados en el |frontmatter| del documento; a
+% saber: |lof| lista de figuras, |lot| lista de tablas,
+% |loc| lista de códigos (usando el paquete |listings|) y
+% |los| lista de símbolos usados (gracias al paquete
+% |nomencl|). 
+%
+% \DescribeMacro{listas}
+% Activa todas las listas, i.e.\ |lof|, |lot|, |loc| y
+% |los|.
+%
+% \DescribeMacro{refnombres, refnumerica}
+% Presentación de  la citas bibliográficas, ya sea con
+% número(|refnumerica|, default) o por nombre/año (|refnombres|).
+%
+% \DescribeMacro{docs}
+% Genera la documentación requerida por el PCF para hacer la
+% solicitud de examen de grado: \textbf{Carta de aceptación del
+% Comité tutoral con la propuesta de sinodales} y el \textbf{voto
+% aprobatorio} (recibo de aceptaci\'on) de los sinodales
+% aprobados por el comit\'e  acad\'emico.
+%
+% \DescribeMacro{index}
+% Genera el glosario al final del documento, usa el paquete
+% |makeidx|.
+% 
+% \DescribeMacro{sencillo,doble,unoymedio} 
+% Tamaño del Interlineado, depende de |setspace|.
+%
+% \DescribeMacro{Opciones de la clase book no mencionadas}
+% Todas son opciones originales de la clase |book| y que en
+% |pcftesis| son ignoradas.
+% \vspace{1.5cm}
+%
+% \section{Paquetes requeridos}
+% \label{sec:features}
+% Como se mencionó arriba |pcftesis| requiere de ciertos
+% paquetes para funcionar y que deben de estar presentes en
+% tu \emph{path} de búsqueda de tu \TeX\space. La lista incluye:
+% \textsf{geometry} (formato de la p\'agina),
+% \textsf{subfigure} (subfiguras en una figura e.g. En la
+% figura 3.b),
+% \textsf{ifpdf} (Determina si estamos compilando con
+% |latex| o |pdflatex| y actúa en consecuencia),
+% \textsf{dcolumn} (alineaci\'on en el punto decimal),
+% \textsf{xcolor} (definici\'on de colores),
+% \textsf{setspace} (espacio entre l\'ineas),
+% \textsf{relsize} (permite usar tama\~nos realtivos de letras),
+% \textsf{makeidx} (glosario),
+% \textsf{nomencl} (lista de s\'imbolos),
+% \textsf{cmap} (permite buscar y copiar en el PDF de salida).
+% \textsf{hyperref} (links en el documento),
+% \textsf{hypcap} (arregla un error de |hyperref| en los
+% \emph{captions} de las figuras y tablas),
+% \textsf{graphicx} (manejo de gr\'aficos),
+% \textsf{draftcopy} (imprime la leyenda ``BORRADOR'' en el
+% PDF de salida),
+% \textsf{todonotes} (notas al margen tipo Post it! en el modo |draft|) ,
+% \textsf{fixme} (notas sobrias al margen en modo |draft|),
+% \textsf{amssymb, amsfonts, amsthm} (paquetes para mateca\'aticas),
+% \textsf{empheq} (permite resaltar ecuaciones, sobrescribe
+% a |amsmath|) ,
+% \textsf{cancel} (coloca una ``cancelaci\'ion'' en las ecuaciones),
+% \textsf{vector} (escritura f\'acil de vectores),
+% \textsf{babel} (manejo de idiomas),
+% \textsf{listings} (lista de c\'odigos),
+% \textsf{mathpazo} (letra bonita para el modo matem\'atico),
+% \textsf{palatino} (letra bonita para el texto),
+% \textsf{courier} (letra para los urls),
+% \textsf{euscript} (letra cursiva bonita para el modo
+% matem\'atico), 
+% \textsf{fncychap} (cap\'itulos bonitos),
+% \textsf{fancyhdr} (encabezados bonitos),
+% \textsf{footmisc} (arregla problemas de formato de los
+% pies de p\'agina),
+% \textsf{varioref} (realiza referencias entre p\'aginas,
+% as\' i como ``en la p\'agina anterior''),
+% \textsf{nameref} (permite hacer referencia por el nombre
+% de la sección o capítulo en lugar de por su número),
+% \textsf{ctable} (nota al pie de las tablas),
+% \textsf{SIunits} (manejo inteligente de unidades del SI),
+% \textsf{ulem} (subrayado de todo),
+% \textsf{showkeys} (para mostrar las etiquetas de
+% ecuaciones, citas y bibliograf\'ia),
+% \textsf{flexbib} (controla la presentaci\'on de la
+% bibliografía, hay dos opciones:  num\'erica o
+% por nombre. Este paquete es m\'as poderoso que
+% \textsf{natbib} y soporta configuraci\'on por
+% idioma. Fu\'e desarrollado en la Universidad de Murcia, Espa\~a.),
+% \textsf{changes} (muestra las partes cambiadas por los
+% otros autores -en este caso el director de tesis o
+% miembros del comit\'e),
+% \textsf{tensor} (escritura f\'acil de tensores) y
+% \textsf{bm} (negritas en modo matem\'atico).
+% Te invito a que leas la documentación
+% (\url{http://www.ctan.org/tex-archive/help/Catalogue/alpha.html}) 
+% de estos paquetes % para que puedes sacarles todo el provecho. 
+%
+% \section{Generando el documento}
+% \label{sec:doc}
+% La clase \pcftesis\space incluye un archivo |Makefile|
+% para ayudarte a través del proceso de generación del
+% documento. Para \textbf{compilar} primero limpia el directorio con
+% \textsf{make clean}, luego teclea \textsf{make dvi} o
+% \textsf{make ps} según sea el caso. Estos comando se
+% encargarán de que se genere todo en orden. Si quieres
+% enviar tus archivos a alguien y que vaya todo lo necesario
+% para su compilación en otra computadora (que tenga \LaTeX
+% por supuesto) teclea \textsf{make tar}. 
+%
+% Para más informaci\'on teclea
+% \begin{verbatim}
+% make ayuda 
+% \end{verbatim}
+% o
+%\begin{verbatim}
+% make help
+% \end{verbatim}
+%
+% \section{Disposición de la tesis}
+% El documento generado por |pcftesis| consta de las
+% siguientes partes en el orden listado, algunas de ellas
+% son opcionales en el momento de la generación y son
+% marcadas con ($*$).
+% \begin{enumerate}
+% \item Portada
+% \item Licencia
+% \item Dedicatoria $*$ 
+% \item Resumen 
+% \item Resumen en ingles \emph{abstract}
+% \item Agradecimientos
+% \item Índice general
+% \item Lista de Figuras $*$
+% \item Lista de Tablas $*$
+% \item Lista de Símbolos $*$
+% \item Lista de Códigos $*$
+% \item Texto principal
+% \item Apéndices 
+% \item Bibliografía General
+% \item Glosario $*$
+% \item Documentos de egreso del PCF $*$
+% \end{enumerate}
+%
+% Los comando y los ambientes (|environments|) que se
+% describen abajo muestran como generar esta estructura,
+% todos ellos se declaran antes de iniciar el documento.
+% 
+% \DescribeMacro{universidad} 
+% Universidad o centro educativo donde se \'esta realizando
+% el trabajo de tesis,  por omisi\'on: \textbf{Universidad
+% Nacional Autónoma de México}. 
+%
+% \DescribeMacro{posgrado}
+% Posgrado o Unidad Adminsitrativa principal al que estas adscrito, valor por omisión: \textbf{Posgrado
+% en Ciencias Físicas}.
+%
+% \DescribeMacro{instituto}
+% Centro o Instituto de Investigaci\'on o subunidad al cual perteneces, valor por
+% omisión: \textbf{ Instituto de Ciencias Nucleares}.
+%
+% \DescribeMacro{autor} 
+% Tu nombre completo, i.e.\ \emph{Crack d'Pot}.
+%
+% \DescribeMacro{numerocuenta} 
+% Número de cuenta o n\'umero de inscripci\'on que te
+% asign\'o tu Universidad, e.g.\ en la UNAM es algo como
+% \emph{503011543}
+%
+% \DescribeMacro{planestudios} 
+% Plan de estudios al cual te inscribiste, e.g.\ en la UNAM
+% es algo como \emph{5009}
+%
+% \DescribeMacro{titulo, tituloingles} 
+% Título de tu tesis en español e inglés (El t\'itulo en
+% ingl\'es se usa en el resumen en ingl\'es. |abstract|). 
+%
+% \DescribeMacro{coordinador} 
+% Nombre Completo del Coordinador del Posgrado, el que firma
+% vamos. Actualmente en el PCF es \emph{Manuel Torres}.
+%
+% \DescribeMacro{titulocoordinador} 
+% Puesto o Título del coordinador, e.g.\ \emph{Coordinador
+% de Posgrado}.
+%
+% \DescribeMacro{directorTesis} 
+% Nombre Completo de tu Director de Tesis, conocido también
+% como asesor, e.g.\ \emph{Batman}.
+%
+% \DescribeMacro{gradodirectorTesis}
+% Grado o T\'itulo acad\'emico del director de tesis, por
+% omis\'on su valor es \emph{Ph.\ D\ }.
+%
+% \DescribeMacro{comitetutorala, comitetutoralb} 
+% Nombre Completo del primer y segundo miembro del comité
+% tutoral.
+%
+% \DescribeMacro{gradocomitetutorala, gradocomitetutoralb}
+% Grado o T\'itulo acad\'emico de los miembros del comit\'e tutoral, por
+% omis\'on su valor es \emph{Ph.\ D\ }.
+%
+% \DescribeMacro{sinodala - sinodalg}
+% Nombre completo del Jurado o Sinodales propuestos para el examen de grado, su
+% número varia según estás en Maestría o Doctorado. Si no
+% sobreescribes a |sinodala|, |sinodalb| o |sinodalc| se
+% usaran los nombres de los miembros del comit\'e.
+%
+% \DescribeMacro{gradosinodal}
+% Grado del |sinodala|-|sinodale|, necesario para el
+% \textbf{voto aprobatorio}. Es necesario agregar la letra
+% del sinodal al final i.e.\ si es para |sinodalb|, entonces
+% el comando es |gradosinodalb|.
+%
+% \DescribeMacro{rfcsinodal}
+% Registro Federal de Contribuyentes del |sinodala| -
+% |sinodale|, necesario para el \textbf{voto aprobatorio.}Es
+% necesario agregar la letra  del sinodal al final i.e.\ si
+% es para |sinodalb|, entonces  
+% el comando es |rfcsinodalb|. 
+%
+% \DescribeMacro{institucionsinodal}
+% Instituci\'on donde labora el |sinodala|-|sinodale|,
+% necesario para el \textbf{voto aprobatorio}. Es necesario
+% agregar la letra del sinodal al final i.e.\ si es para
+% |sinodalb|, entonces  el comando es |institucionsinodalb| 
+%
+% \DescribeMacro{antiguedadunamsinodal}
+% Antig\"uedad del |sinodal| en la UNAM (si aplica),
+% necesario para el \textbf{voto aprobatorio}. Es necesario
+% agregar la letra del sinodal al final i.e.\ si es para
+% |sinodalb|, entonces  el comando es |antiguedadunamsinodalb| 
+% 
+% \DescribeMacro{correoesinodal}
+% Correo electr\'onico del |sinodala|-|sinodale|, necesario
+% para el \textbf{voto aprobatorio}. Es necesario agregar la
+% letra del sinodal al final i.e.\ si es para el |sinodalb|,
+% entonces el comando es |correoesinodalb|.
+%
+% \DescribeMacro{telefonosinodal}
+% Tel\'efono del |sinodala|-|sinodale|, necesario
+% para el \textbf{voto aprobatorio}. Es necesario agregar la
+% letra del sinodal al final i.e.\ si es para el |sinodalb|,
+% entonces el comando es |telefonosinodalb|.
+%
+% \DescribeMacro{mesexamen,anoexamen, fechaexamen}
+% Fecha de tu examen por mes y a\~no. El macro |fechaexamen|
+% se llena de manera autom\'atica a |mesexamen|, |anoexamen| si
+% no lo sobrescribes.
+%
+% \DescribeMacro{textolicencia}
+% Si no usas la creativecommons, el texto que quieres que
+% aparezca en la página de licencia, valor por omisión:
+% Todos los derechos reservados.
+%
+% \DescribeMacro{resumen,abstract}
+% Resumen de tu trabajo en español e inglés, puede ser de la
+% longitud que quieras.
+%
+% \DescribeMacro{dedicatoria, agradecimientos}
+% Dedicatoria a aquellas personas especiales y
+% Agradecimientos a los que hicieron posible la obtenci\'on
+% del grado.
+%
+% \DescribeMacro{archivobibTeX}
+% Ruta al archivo de la bibliografía en formato BibTeX. 
+%
+% \DescribeMacro{estilobibliografia}
+% Estilo en el cual deseas que aparezca la
+% bibliograf\'ia. Este comando ha sido descontinuado y no
+% se recomienda su uso. Su valor por omisión es
+% |flexbib|. Si lo sobreescribes quizá tu estilo no soporte
+% el español (por ejemplo |amsplain| no lo soporta i.e.\ no
+% cambia ``and'' por ``y'').
+%
+% \section{Tips y sugerencias}
+% \label{subsec:tips}
+% Revisa muy bien el archivo de ejemplo generado,
+% |cascaron.tex| contiene algunas ideas y recomendaciones de
+% uso. 
+% \begin{itemize}
+% \item Si te has fijado en lugar de la versión inglesa del
+% operador trigonométrico \textsf{sin} aparece \textsf{sen}
+% (que es lo correcto en español), si por alguna razón
+% quisieras regresar al comportamiento original incluye el
+% siguiente código en el preámbulo (i.e.\ antes de la
+% instrucción |\begin{document}|) de tu documento: 
+% \begin{verbatim}
+% \renewcommand{\sin}{\mathop{\mbox{\normalfont sin}}\nolimits} 
+% \end{verbatim}
+% y así con todos los operadores que se han castellanizado.
+% \item Explota la potencia del paquete |changes|, agrega
+% las siguientes líneas de código a tu preámbulo
+% \begin{verbatim}
+% \definechangesauthor[asesor]{asesor}{red}
+% \definechangesauthor[estudiante]{estudiante}{blue}
+%
+% \newcommand{\asesornuevo}[1]{\added[asesor]{#1}}
+% \newcommand{\asesorborrado}[1]{\deleted[asesor]{#1}}
+% \newcommand{\asesorcambiado}[2]{\replaced[asesor]{#1}{#2}}
+%
+% \newcommand{\estudiantenuevo}[1]{\added[estudiante]{#1}}
+% \newcommand{\estudianteborrado}[1]{\deleted[estudiante]{#1}}
+% \newcommand{\estudiantecambiado}[2]{\replaced[estudiante]{#1}{#2}}
+% \end{verbatim}
+% Las primeras dos líneas definen los autores del documento
+% y les asigna un color. Los dos conjuntos de tres líneas
+% definen comandos de fácil uso para poder seguir de una
+% manera visual los cambios hechos por el otro
+% autor. Recuerda que estos sólo se verán si estás en modo
+% |draft|.
+% \item Esta clase tiene incorporado sus propias notas
+% adheridles que puedes servir como recordatorio, vienen en
+% dos clases: |\todo{algo}| y |\fixme{algo}|. Checa la
+% documentación de esos paquetes para 
+% usarlos al máximo. Sólo aparecerá
+% en modo |draft|.
+% \item Si quieres incluir una figura, pero aún no la has
+% terminado, usa el comando |\\missingfigure{descripcion}|
+% que ocupará el espacio en lo que la acabas. Sólo se verá
+% en modo |draft|.
+% \end{itemize}
+% 
+% \section{Errores}\label{sec:bugs}
+%
+% \subsection{¿Encontraste un error?}
+% Si encontraste un error, antes de contactarme por favor
+% verifica que no haya sido un error de otro paquete que
+% est\'es usando o que haya sido un error de dedo o uso. Si
+% despu\'es de hacerlo el error persiste, probablemente sea
+% un error de la clase, cuando reportes el error por favor
+% anexa los archivos \texttt{log} para que podamos saber que
+% pas\'o. En el caso de que hayas encontrado un error y
+% sepas como solucionarlo, por favor comparte la soluci\'on
+% de esta manera se enriquecer\'a la clase y ayudar\'as a
+% otros como t\'u.
+%
+% \subsection{Bugs conocidos}
+% Hasta la fecha ninguno \ldots que no hayamos reparado \texttt{:)}
+%
+% \section{Ejemplo de Uso}
+% A continuaci\'on se muestra un archivo |.tex| simple. Este
+% archivo es que actualmente uso en mi trabajo de
+% tesis. Otro archivo más simple (\texttt{tesis.tex}) fu\'e generado cuando
+% instalaste la clase \pcftesis usando |pcftesis.ins|
+% \begin{verbatim}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %   Tesis de Adolfo De Unánue Tiscareño
+% %   o Doctorado en Ciencias Físicas
+% %   o ICN - PCF, UNAM
+% %   o tesis.tex
+% %   o Última modificación: 
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \listfiles
+%
+% \documentclass[11pt,encabalternados,simple, los,
+% index,draft, docs]{pcftesis}
+%
+% % Definimos los autores del documento (aquellos que 
+% % hacen cambios) además, definimos algunos comandos para
+% % acortar los comandos por default
+% \definechangesauthor[asesor]{asesor}{red}
+% \definechangesauthor[nano]{nano}{blue}
+%
+% \newcommand{\asesornuevo}[1]{\added[asesor]{#1}}
+% \newcommand{\asesorborrado}[1]{\deleted[asesor]{#1}}
+% \newcommand{\asesorcambiado}[2]{\replaced[asesor]{#1}{#2}}
+%
+% \newcommand{\nanonuevo}[1]{\added[nano]{#1}}
+% \newcommand{\nanoborrado}[1]{\deleted[nano]{#1}}
+% \newcommand{\nanocambiado}[2]{\replaced[nano]{#1}{#2}}
+%
+%
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%             Datos del documento
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \autor{Adolfo J. De Unánue Tiscareño}
+% \numerocuenta{503011365}
+% \planestudios{5009}
+% \titulo{Orígenes cuánticos de las asimetrías cosmológicas}
+% \tituloingles{The quantum origins of the cosmological asymmetry}
+% \directorTesis{Daniel Eduardo Sudarsky}
+% \comitetutorala{Chryssommalis Chryssomalakos}
+% \comitetutoralb{Alejandro Corichi}
+% \mesexamen{Abril}
+% \responsableVA{Dr. Isidro Ávila Martínez}
+% \tituloresponsableVA{Director General de Administración
+%   Escolar}
+% \resumen{Aquí irá el resumen $\ldots$}
+% \abstract{Here comes the sun $\ldots$}
+% \dedicatoria{Dedico $\ldots$}
+% \agradecimientos{Agradezco $\ldots$}
+% \archivobibTeX{bibliografia/tesis}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% % Configuración del archivo PDF de salida (solo 
+% % funciona si se compila con pdflatex
+% \ifpdf
+%     \hypersetup{%
+%       unicode=true,           
+%       pdfauthor=Adolfo De Unanue,
+%       pdftitle =Origenes de las asimetrias cosmologicas,
+%     }%
+% \fi
+%
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%           Archivos a compilar
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \def\archivos{capitulo_1,apendice_c}
+%
+% \includeonly{\archivos}
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% \begin{document}
+%    \PCFfrontmatter
+%    %\include{intro}
+%    \PCFmainmatter
+%    \include{capitulo_1}
+%    \include{capitulo_2}
+%    \include{capitulo_3}
+%    \include{capitulo_4}
+%    \include{conclusiones}
+%
+%
+%    \PCFapendices
+%    %%% NOTA: Debido a un bug entre appendix y natbib es
+%    %%% necesario usar \input en lugar de \include para el
+%    %%% primer apéndice, de no hacerse así sale mal en el ToC
+%    \input{apendice_a}
+%    \include{apendice_b}
+%    \include{apendice_c}
+%
+%    \PCFbackmatter
+% \end{document} 
+%
+%%%% Local Variables: 
+%%%% mode: latex
+%%%% coding-system: utf-8
+%%%% TeX-master: t
+%%%% End: 
+%
+% \end{verbatim}
+%
+% \section{Agradecimientos}
+% Para poder realizar esta clase me base en los excelentes
+% ejemplos de clases para tesis y disertaciones como
+% |byumsphd.cls| de Christopher K. Monson
+% ; la |niuthesis.cls| de  Roland Winkler; y la
+% |PisaPhdThesis_LaTeX.cls| de Marco Comini que se pueden
+% encontrar con ayuda de 
+% \textbf{Google}, también es invaluable la ayuda del
+% catálogo en línea del |CTAN|:
+% \url{http://www.ctan.org/tex-archive/help/Catalogue/alpha.html}, 
+% sitio que recomiendo para sacarle más jugo a las clases
+% importadas por \pcftesis\space. 
+% Una mención especial para Jos\'e M. Mira que desarroll\'o
+% |flexbib| y evit\'o un dolor de cabeza sobre la
+% castellanizaci\'on de la bibliograf\'ia.
+%
+% También quiero agradecer a de Héctor Coronado
+% (ICN-UNAM) y Francisco Nettel (ICN-UNAM) por reportar los
+% errores y ayudarme a resolverlos. Su participación hizo de
+% |pcftesis| una mejor clase.
+% 
+%
+% \StopEventually{%
+%   \footnotesize
+%   \PrintChanges
+%   }
+%
+% \clearpage
+% \section{Implementación}
+% Lo que sigue es un intento de explicar el código de la
+% clase \pcftesis\space a posibles hackers de \TeX\space.
+%
+% \small\mbox{}\\
+% \iffalse (Don't show this in the doc).
+%<*class>
+% \fi
+% Al principio definimos la versión de \LaTeX\space que
+% usaremos y la etiqueta de información de la clase \pcftesis\space.
+%    \begin{macrocode}
+\NeedsTeXFormat{LaTeX2e}[1995/12/01]
+\ProvidesClass{pcftesis}[2009/04/17 Clase para tesis del PCF-UNAM]
+%    \end{macrocode}
+% \iffalse
+%</class>
+% \fi
+% \iffalse (Don't show this in the doc).
+%    \begin{macrocode}
+%<template>\ProvidesFile{cascaron.tex}
+%    \end{macrocode}
+% \fi
+
+% \iffalse
+%<*class>
+% \fi
+% Variables boleanas, junto con sus valores por omisión.
+%    \begin{macrocode}
+
+\newif\if@pcf@disertacion                \@pcf@disertaciontrue
+% Si es draft mostramos más cosas
+\newif\if@pcf@draft                      \@pcf@draftfalse
+% Versión adornados
+\newif\if@pcf@adornado                   \@pcf@adornadotrue
+\newif\if@pcf@semi                       % Versión semi-adornada
+\newif\if@pcf@simple                     % Versión sencilla
+\newif\if@pcf@lof                        % Lista de Figuras?
+\newif\if@pcf@lot                        % Lista de Tablas?
+\newif\if@pcf@loc                        % Lista de Códigos?
+\newif\if@pcf@los                        % Lista de Símbolos?
+\newif\if@pcf@index                      % Índice analítico?
+\newif\if@pcf@separador                  % Separador     
+\newif\if@pcf@iliad                      % ver en  iRex iLiad?
+% poner la licencia cc
+\newif\if@pcf@creativecommons            \@pcf@creativecommonstrue
+\newif\if@pcf@nocreativecommons          % no poner la licencia cc
+% documentacion del pcf
+\newif\if@pcf@docs                       % Agregar los docs del pcf
+% Opciones de interlineado
+\newif\if@pcf@interlineadosencillo       \@pcf@interlineadosencillofalse
+\newif\if@pcf@interlineadodoble          \@pcf@interlineadodobletrue
+\newif\if@pcf@interlineadounoymedio      \@pcf@interlineadounoymediofalse
+
+\newif\if@pcf@emacs                      % Agradecimientos
+                                         % de Edición con GNU/Emacs
+
+\newif\if@pcf@noencab                    \@pcf@noencabfalse
+\newif\if@pcf@encabcentrados             \@pcf@encabcentradostrue
+\newif\if@pcf@encabalternados            \@pcf@encabalternadosfalse
+
+\newif\if@pcf@refnum                     \@pcf@refnumtrue
+%
+%    \end{macrocode}
+% Opciones que se le pueden pasar a la clase y su efecto en
+% las variables booleanas.
+%    \begin{macrocode}
+\DeclareOption{adornado}{\@pcf@semifalse \@pcf@simplefalse \@pcf@adornadotrue}
+\DeclareOption{semi}{\@pcf@adornadofalse \@pcf@simplefalse \@pcf@semitrue }
+\DeclareOption{simple}{\@pcf@adornadofalse \@pcf@semifalse \@pcf@simpletrue}
+
+
+\DeclareOption{noencab}
+{\@pcf@noencabtrue \@pcf@encabcentradosfalse \@pcf@encabalternadosfalse}
+\DeclareOption{encabcentrados}
+{\@pcf@encabcentradostrue \@pcf@encabalternadosfalse \@pcf@noencabfalse }
+\DeclareOption{encabalternados}
+{\@pcf@encabcentradosfalse \@pcf@encabalternadostrue \@pcf@noencabfalse }
+
+\DeclareOption{ms}{\@pcf@disertacionfalse}
+\DeclareOption{phd}{\@pcf@disertaciontrue}
+
+\DeclareOption{lof}{\@pcf@loftrue}
+\DeclareOption{lot}{\@pcf@lottrue}
+\DeclareOption{loc}{\@pcf@loctrue}
+\DeclareOption{los}{\@pcf@lostrue}
+
+\DeclareOption{listas}{\@pcf@loftrue \@pcf@lottrue \@pcf@loctrue \@pcf@lostrue}
+
+\DeclareOption{index}{\@pcf@indextrue}
+
+\DeclareOption{separador}{\@pcf@separadortrue}
+
+\DeclareOption{iliad}{\@pcf@iliadtrue \@pcf@draftfalse}
+
+\DeclareOption{emacs}{\@pcf@emacstrue}
+\DeclareOption{cc}{\@pcf@creativecommonstrue}
+\DeclareOption{nocc}{\@pcf@creativecommonsfalse}
+
+\DeclareOption{docs}{\@pcf@docstrue}
+
+\DeclareOption{sencillo}{\@pcf@interlineadosencillotrue
+  \@pcf@interlineadodoblefalse \@pcf@interlineadounoymediofalse}
+\DeclareOption{doble}{\@pcf@interlineadodobletrue \@pcf@interlineadounoymediofalse
+  \@pcf@interlineadosencillofalse}
+\DeclareOption{unoymedio}{\@pcf@interlineadounoymediotrue
+  \@pcf@interlineadodoblefalse \@pcf@interlineadosencillofalse}
+
+
+\DeclareOption{draft}{\@pcf@drafttrue}
+\DeclareOption{final}{\@pcf@draftfalse}
+\DeclareOption{10pt}{\PassOptionsToClass{10pt}{book}}
+\DeclareOption{11pt}{\PassOptionsToClass{11pt}{book}}
+\DeclareOption{12pt}{\PassOptionsToClass{12pt}{book}}
+
+
+
+\DeclareOption{refnumerica}{\@pcf@refnumtrue}
+\DeclareOption{refnombres}{\@pcf@refnumfalse}
+
+
+% Opciones no soportadas
+\DeclareOption{a5paper}
+{\ClassWarningNoLine{pcftesis}{Opción `a5paper' no soportada: Ignorada}}
+\DeclareOption{b5paper}
+{\ClassWarningNoLine{pcftesis}{Opción `b5paper' no soportada: Ignorada}}
+\DeclareOption{a4paper}
+{\ClassWarningNoLine{pcftesis}{Opción `a4paper' no soportada: Ignorada}}
+\DeclareOption{legalpaper}
+{\ClassWarningNoLine{pcftesis}{Opción `legalpaper' no soportada: Ignorada}}
+\DeclareOption{executivepaper}
+{\ClassWarningNoLine{pcftesis}{Opción `executivepaper' no soportada: Ignorada}}
+\DeclareOption{landscape}
+{\ClassWarningNoLine{pcftesis}{Opción `landscape' no soportada: Ignorada}}
+\DeclareOption{titlepage}
+{\ClassWarningNoLine{pcftesis}{Opción `titlepage' no soportada: Ignorada}}
+\DeclareOption{twocolumn}
+{\ClassWarningNoLine{pcftesis}{Opción `twocolumn' no soportada: Ignorada}}
+\DeclareOption{oneside}
+{\ClassWarningNoLine{pcftesis}{Opción `oneside' no soportada: Ignorada}}
+\DeclareOption{openany} 
+{\ClassWarningNoLine{pcftesis}{Opción `openany' no soportada: Ignorada}}
+\DeclareOption{twoside} 
+{\ClassWarningNoLine{pcftesis}{Opción `twoside' no soportada: Ignorada}}
+
+%
+%    \end{macrocode}
+% Imprimimos un mensaje avisando si estamos en modo |draft|
+%    \begin{macrocode}
+
+\if@pcf@draft
+    \ClassWarningNoLine{pcftesis}{Documento en modo DRAFT}
+\fi
+%
+% \end{macrocode}
+% Después de esto, cargamos las opciones a la clase |book|
+% con las siguientes líneas de código.
+%\begin{macrocode}
+\ExecuteOptions{final,letterpaper, openright,
+  twoside,onecol}
+\DeclareOption*{\ProcessOptionsToClass{\CurrentOption}{book}}
+\ProcessOptions\relax
+\LoadClass{book}
+%
+% \end{macrocode}
+% Iniciamos cargando paquetes necesarios para el
+% funcionamiento de\pdftesis\space.
+\RequirePackage{ifpdf}
+% modos matemáticos de la AMS
+\RequirePackage{amssymb}
+%\RequirePackage{amsmath}
+% Resaltar ecuaciones en lugar de amsmath 
+% (automáticamente lo carga)
+\RequirePackage[nosumlimits]{empheq}
+\RequirePackage{amsfonts}
+\RequirePackage{amsthm}
+% Permite cancelar ecuaciones
+\RequirePackage{cancel}
+% Vectores fáciles de escribir, incluye componentes, listas, etc...
+\RequirePackage{vector}
+% Tensores fáciles de escribir
+\RequirePackage{tensor}
+% Alineación de decimales
+\RequirePackage{dcolumn}
+% Bold en modo matemático se prefiere que el antiguo (y
+% ahora abandonado) amsbsy
+\RequirePackage{bm}
+%
+%    \end{macrocode}
+% Verificamos si estamos compilando con |latex| o |pdflatex|
+% y cargamos con las opciones acordes a los paquetes |color|
+% y |graphicx|
+%    \begin{macrocode}
+\ifpdf
+    % Color
+    \RequirePackage[pdftex]{color}
+    % Gráficos
+    \RequirePackage[pdftex]{graphicx}
+\else
+    % Color
+    \RequirePackage[dvips]{color}
+    % Gráficos
+    \RequirePackage[dvips]{graphicx}
+\fi
+%    \end{macrocode}
+% Continuamos cargando paquetes, dependiendo de ciertas
+% banderas definidas arriba son las opciones usadas
+% \begin{macrocode}
+
+% Espacios
+\RequirePackage[singlespacing]{setspace}
+
+% Subrayados fancy
+\RequirePackage[normalem]{ulem}
+
+% Índices
+\RequirePackage{makeidx} 
+\RequirePackage[refpage,refeq,spanish,intoc]{nomencl}
+
+% Paquetes para insertar figuras
+\RequirePackage{subfigure}
+\RequirePackage{rotating}
+
+% Geometría
+\ifpdf
+   \RequirePackage[driver=pdftex]{geometry}
+\else
+   \RequirePackage[driver=dvips]{geometry}
+\fi
+\geometry{reset}
+
+
+
+\if@pcf@iliad
+\ClassWarningNoLine{pcftesis}
+{Documento prepar\'andose para ser visto en una IREX ILIAD}
+    \geometry{papersize={122.0mm, 150mm}}
+    \geometry{twoside, bindingoffset=0.5cm}
+\else
+    \geometry{papersize={8.5in,11in},hscale=0.7,vscale=0.8,hmarginratio=1:1,vmarginratio=1:1}
+    \geometry{twoside=true}
+    \geometry{footskip=18.53pt}
+    \geometry{headsep=25pt}
+\fi
+
+%\geometry{centering}
+
+\if@pcf@draft
+    \geometry{verbose}
+\fi
+
+% Paquete de idiomas en español
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[english,spanish]{babel}
+
+
+\if@pcf@draft
+    % Cambios 
+    \RequirePackage[draft]{changes}
+    \ifpdf
+        \RequirePackage[spanish,colorinlistoftodos,textsize=tiny,backgroundcolor=yellow,textwidth=0.95\marginparwidth]{todonotes}   
+    \else
+        % Notas estilo Postit!
+        \RequirePackage[spanish,colorinlistoftodos,textsize=tiny,backgroundcolor=yellow,dvistyle,textwidth=0.95\marginparwidth,dvistyle]{todonotes}   
+    \fi
+    % Notas estilo Fixme
+    \RequirePackage[spanish,draft, silent, footnote, marginclue, index]{fixme}
+\else %
+    % Cambios 
+    \RequirePackage[final]{changes}
+    % No es necesario arreglar el dvi o pdf ya que no se muestran
+    % Notas estilo Postit!
+    \RequirePackage[disable,spanish,colorinlistoftodos,textsize=tiny,backgroundcolor=yellow,dvistyle]{todonotes}   
+    % Notas estilo Fixme
+    \RequirePackage[spanish,  silent, footnote, marginclue, index]{fixme}
+    \ClassWarningNoLine{pcftesis}{Se especificó la opción de
+      versión FINAL.}
+\fi %
+
+% Índice por palabras
+\if@pcf@index
+    % Verifica que haya un archivo de índice, si no lanza una advertencia
+    \renewcommand*\printindex{\InputIfFileExists{\jobname.ind}{}
+      {\ClassWarningNoLine{pcftesis}{No existe el archivo \jobname.ind.}}}
+    \makeindex
+\fi
+
+% Símbolos definidos en el sistemas
+\if@pcf@los
+    \makenomenclature
+\fi
+
+% Fuentes bonitas para el código
+\RequirePackage{listings}
+
+\lstset{ frame=Ltb, framerule=0pt, aboveskip=0.5cm,
+  framextopmargin=3pt, framexbottommargin=3pt,
+  framexleftmargin=0.4cm, framesep=0pt, rulesep=.4pt,
+  backgroundcolor=\color{gray97},
+  rulesepcolor=\color{black},
+     %
+  stringstyle=\ttfamily, showstringspaces = false,
+  basicstyle=\small\ttfamily, commentstyle=\color{gray45},
+  keywordstyle=\bfseries,
+     %
+  numbers=left, numbersep=15pt, numberstyle=\tiny,
+  numberfirstline = false, breaklines=true, }
+
+
+% minimizar fragmentado de listados
+\lstnewenvironment{listing}[1][]
+{\lstset{#1}\pagebreak[0]}{\pagebreak[0]}
+
+% Nombre de la lista de códigos en español
+\renewcommand\lstlistlistingname{Lista de Códigos}
+
+%% Fuentes
+
+%% Permitimos el uso de tamaños de letras relativas
+%% (e.g. \smaller, \larger).
+\RequirePackage{relsize}
+
+% Times for rm and math | Helvetica for ss | Courier for  tt
+\RequirePackage{mathpazo} %rm & math
+%\RequirePackage[scaled=0.90]{helvet} %ss
+\RequirePackage{palatino}
+\RequirePackage{courier} %tt
+\normalfont \usepackage[T1]{fontenc}
+
+% Cursivas para modo matemático 
+% (aparte de la default \mathcal)
+\RequirePackage[mathscr]{euscript}
+
+% Ajustes para la expansión de letras en pdfTeX
+\RequirePackage{microtype}
+
+
+%% A LaTeX2e package to help change the style of any or
+%% all
+%% of LaTeX's sectional headers in the article, book, or
+%% report classes.
+%\usepackage{sectsty}
+%\allsectionsfont{\usefont{OT1}{phv}{bc}{n}\selectfont}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Capítulos
+%%
+\if@pcf@adornado
+    \ClassWarningNoLine{pcftesis}{T\'itulos de Cap\'itulos ADORNADOS.}
+    %% Ahora cambiamos el estilo del capítulo
+    %% Usamos el paquete quotchap
+    %\RequirePackage[avantgarde]{quotchap}
+    %\RequirePackage[calcwidth]{titlesec}
+    %\titleformat{\section}[hang]{\sffamily\bfseries}
+    %{\Large\thesection}{50pt}{\Large}[{\titlerule[0.5pt]}]
+   \RequirePackage[Conny]{fncychap}
+\fi
+
+%
+%
+
+\if@pcf@semi
+    \ClassWarningNoLine{pcftesis}{T\'itulos de Cap\'itulos SEMI-ADORNADOS.}
+    \RequirePackage[Janny]{fncychap}
+\fi
+
+%
+%
+\if@pcf@simple
+    \ClassWarningNoLine{pcftesis}{T\'itulos de Cap\'itulos SIMPLES.}
+    \RequirePackage[newlinetospace]{titlesec}
+    \titleformat{\chapter}[display] % top level 1
+    {\thispagestyle{empty}
+      \filcenter\bfseries}%
+    {\MakeUppercase{\@chapapp}\ \thechapter}{0pt}{\MakeUppercase}
+    \titleformat{\section} % level 2
+    {\filcenter\bfseries}{\thesection}{1em}{}
+    \titleformat{\subsection} % level 3
+    {\filcenter\bfseries}{\thesubsection}{1em}{\uline}
+    \titleformat{\subsubsection}[hang] % level 4
+    {\bfseries}{\thesubsubsection}{1em}{\uline}
+    \titleformat{\paragraph}[runin] % level 5
+    {\itshape}{\theparagraph}{1em}{}
+    \titleformat{\subparagraph}[runin] % level 6
+    {\itshape}{\thesubparagraph}{1em}{}
+    
+    \titlespacing{\chapter}{0pt}{1.0in}{*4} % top level 1
+    \titlespacing{\section}{0pt}{*8}{*4} % level 2
+    \titlespacing{\subsection}{0pt}{*8}{*4} % level 3
+    \titlespacing{\subsubsection}{0pt}{*8}{*4} % level 4
+    \titlespacing{\paragraph}{\parindent}{*8}{*4} % level 5
+    \titlespacing{\subparagraph}{\parindent}{*8}{*4} % level 6
+    
+    % Use titletoc for formatting the table of contents, the lists of
+    % tables, figures, and appendices
+    \RequirePackage{titletoc}
+
+    % \contentsmargin[0.6pc]{2.5em} set right margin
+    % \titlecontents
+    % {chapter} [1.5em] {}                  %{<section>} [left] {<above>}
+    % {\contentslabel{1.5em}\MakeUppercase} %{<before with lablel>}
+    % {\hspace*{-1.5em}\MakeUppercase}      %{<before without label>}
+    % {\titlerule*[0.6pc]{.}\contentspage}  %{<filler and page>}
+    % \dottedcontents{section}[<left>]{<above>}{<label width>}{<leader width>}
+    % The difference (<left> - <label width>) is <left> for the next-upper level
+    \dottedcontents{section}[3.8em]{}{2.3em}{0.6pc}
+    \dottedcontents{subsection}[7.0em]{}{3.2em}{0.6pc}
+    \dottedcontents{subsubsection}[11.1em]{}{4.1em}{0.6pc}
+    \dottedcontents{figure}[3.8em]{}{2.3em}{0.6pc}
+    \dottedcontents{table}[3.8em]{}{2.3em}{0.6pc}
+
+    \contentsuse{chapter}{loa} % needed by titletoc
+
+    % Use tocbibind to create entries in the toc for lof, lot, and loa.
+    % Suppress entry `toc' in toc.
+    \RequirePackage[nottoc]{tocbibind}
+    % \tocfile is command in tocbibind for new listings
+    \newcommand{\listofappend}{\tocfile{List of Appendices}{loa}}
+\fi
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\RequirePackage{fancyhdr}
+% Eliminamos los valores por default
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{15.4pt}
+
+\renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{#1}}{}}
+\renewcommand{\sectionmark}[1]{\markright{\MakeUppercase{#1}}{}}
+\renewcommand{\headrulewidth}{0pt}
+
+
+%% Configuración de los captions en figuras, tablas, etc.
+\RequirePackage[font=small,format=plain,labelfont=bf,up,textfont=it,up]{caption}
+\renewcommand{\captionfont}{\small\itshape}
+
+%% Citas al principio del capítulo
+\RequirePackage{epigraph}
+
+%% Forzar a los pies de página a estar *realmente* abajo
+%% (bottom) y a que ponga comas entre pies de página, en
+%% caso de que haya varias en un sólo lugar.
+\RequirePackage[bottom, multiple,stable]{footmisc}
+
+% Acrónimos
+\RequirePackage[printonlyused,withpage]{acronym}
+
+% Referencias indicando la página
+\RequirePackage[spanish]{varioref}
+
+\RequirePackage{ctable}
+
+% Referencia al título del capítulo, sección, etc
+\RequirePackage{nameref}
+
+% Unidades SI
+\RequirePackage[squaren, derivedinbase, derived,
+cdot]{SIunits}
+\ClassWarningNoLine{pcftesis}{Se est\'a usando el paquete
+  SIUnits en lugar del nuevo SIUnitx, esto se debe a que la
+  distribuci\'on con la que cuentan la mayoría de los
+  sistemas basados en Debian (Debian, Ubuntu, etc) tienen
+  texlive 2007. Alg\'un d\'ia se actualizar\'a acordemente.}
+
+
+
+\RequirePackage{appendix}
+
+\RequirePackage[strict]{chngpage}
+
+\usepackage{url}
+
+
+\ifpdf
+   % PERMITE que uno pueda buscar, copiar y pegar caracteres en
+   % visores compatibles, como acrobat o evince
+   \RequirePackage{cmap}
+   % Tiene que ser una de las últimas cargadas
+   % \RequirePackage[linktocpage]{hyperref}
+   
+  \RequirePackage[pdftex,
+            letterpaper=true,%
+            bookmarks=true,%
+            bookmarksnumbered=true,%
+            linktocpage=true,%
+            breaklinks=true,%
+            bookmarkstype=toc,%
+            colorlinks=false,%
+            pdfpagemode=UseOutlines]{hyperref}
+  \AtBeginDocument{
+    \pdfadjustspacing=1
+  }
+
+
+  % Para romper los url
+  \RequirePackage{breakurl}
+  % Tienen que ir después de hyperref
+  % Arregla unos problemas de hyperref con imágenes y tablas
+  \RequirePackage{hypcap}
+\fi
+
+% Trata de remover viudas y huérfanos
+% (Una sóla línea en el una página)
+\widowpenalty=2000
+\clubpenalty=2000
+
+
+
+
+\if@pcf@draft
+    % Muestra las referencias, citas y etiquetas
+    
+    \RequirePackage[notref,notcite]{showkeys}
+    \RequirePackage[first,bottomafter,draft,timestamp]{draftcopy} 
+    \draftcopyName{BORRADOR}{120}
+\fi
+
+\if@pcf@refnum
+  \RequirePackage[spanish,plain,square,sort&compress]{flexbib} 
+\else
+  \RequirePackage[spanish,authoryear,square,sort]{flexbib}
+\fi
+   
+
+\ifpdf
+    \RequirePackage{hypernat}
+\fi
+%    \end{macrocode}
+% A continuación los macros internos
+%    \begin{macrocode}
+
+\newcommand*{\@pcf@grado}{
+    \if@pcf@disertacion
+        {Doctor en Ciencias (Física)}
+    \else
+        {Maestro en Ciencias}
+    \fi
+}
+
+\newcommand*{\@pcf@documento}{
+    \if@pcf@disertacion
+        Tesis
+    \else
+        Tesis
+    \fi
+}
+
+
+\newcommand{\@pcf@margenesBody}{%
+  \setlength{\evensidemargin}{0.0in}%
+  %\setlength{\evensidemargin}{0.5in}%
+}
+
+\renewcommand\cleardoublepage{%
+  \clearpage\if@twoside \ifodd\c@page\else
+  \hbox{}
+  \vspace*{\fill}
+  \thispagestyle{empty}
+  \newpage
+  \if@twocolumn\hbox{}\newpage\fi\fi\fi
+}
+
+% Comandos para ser usados por toda la clase
+
+\newcommand{\@pcf@unlado}{\setboolean{@mparswitch}{false}\setboolean{@twoside}{false}}
+\newcommand{\@pcf@amboslados}{\setboolean{@mparswitch}{true}\setboolean{@twoside}{true}}
+
+\newcommand{\@pcf@universidad}{Universidad Nacional Autónoma
+  de México}
+\newcommand{\@pcf@posgrado}{Posgrado en Ciencias Físicas}
+\newcommand{\@pcf@instituto}{Instituto de Ciencias
+  Nucleares}
+\newcommand{\@pcf@lugar}{Ciudad Universitaria}
+\newcommand{\@pcf@coordinador}{Manuel Torres}
+\newcommand{\@pcf@titulocoordinador}{}
+\newcommand{\@pcf@responsableVA}{}
+\newcommand{\@pcf@tituloresponsableVA}{}
+
+\newcommand*{\@pcf@titulo}{
+  \ClassError{pcftesis}{
+    Debes de especificar un titulo para la tesis!}
+  {Usa el comando \protect\titulo{} en el preamble.}}
+
+
+\newcommand*{\@pcf@tituloingles}{
+  \ClassError{pcftesis}{
+    Debes de especificar un titulo en ingl\'espara la tesis
+    (se\'a usado en el resumen en ingl\'es)}
+  {Usa el comando \protect\tituloingles{} en el preamble.}}
+
+\newcommand*{\@pcf@autor}{
+  \ClassError{pcftesis}{
+    Debes de especificar tu nombre!}
+  {Usa el comando \protect\autor{} en el  \MessageBreak
+    preamble. El argumento es tu nombre y tus apellidos}}
+
+\newcommand*{\@pcf@numerocuenta}{
+  \ClassError{pcftesis}{
+    Debes de especificar  tu numero de cuenta.}
+  {Usa el comando \protect\numerocuenta{} en el preamble.}}
+
+\newcommand*{\@pcf@planestudios}{
+  \ClassError{pcftesis}{
+    Debes de especificar el plan de estudios al cual
+    perteneces, e.g 5001.}
+  {Usa el comando \protect\planestudios{} en el preamble.}}
+
+\newcommand*{\@pcf@directorTesis}{
+  \ClassError{pcftesis}{
+    Debes de especificar a tu Director de Tesis.}
+  {Usa el comando \protect\tutor{} en el preamble.}}
+
+\newcommand*{\@pcf@gradodirectorTesis}{Ph.\ D.\ }
+
+\newcommand{\@pcf@resumen}{
+  \ClassError{pcftesis}{
+    Debes de especificar un resumen.}
+  {Use the \protect\resumen[]{} command in the preamble.}}
+
+\newcommand{\@pcf@abstract}{
+  \ClassError{pcftesis}{
+    Debes de especificar un abstract (i.e. un resumen en ingles).}
+  {Use the \protect\abstract[]{} command in the preamble.}}
+
+\newcommand{\@pcf@comitetutorala}{}
+\newcommand{\@pcf@gradocomitetutorala}{Ph.\ D.\ }
+\newcommand{\@pcf@comitetutoralb}{}
+\newcommand{\@pcf@gradocomitetutoralb}{Ph.\ D.\ }
+
+\newcommand{\@pcf@sinodala}{\@pcf@directorTesis}
+\newcommand{\@pcf@gradosinodala}{\@pcf@gradodirectorTesis}
+\newcommand{\@pcf@rfcsinodala}{}
+\newcommand{\@pcf@institucionsinodala}{}
+\newcommand{\@pcf@antiguedadunamsinodala}{}
+\newcommand{\@pcf@correoesinodala}{}
+\newcommand{\@pcf@telefonosinodala}{}
+
+\newcommand{\@pcf@sinodalb}{\@pcf@comitetutorala}
+\newcommand{\@pcf@gradosinodalb}{\@pcf@gradocomitetutorala}
+\newcommand{\@pcf@rfcsinodalb}{}
+\newcommand{\@pcf@institucionsinodalb}{}
+\newcommand{\@pcf@antiguedadunamsinodalb}{}
+\newcommand{\@pcf@correoesinodalb}{}
+\newcommand{\@pcf@telefonosinodalb}{}
+
+\newcommand{\@pcf@sinodalc}{\@pcf@comitetutoralb}
+\newcommand{\@pcf@gradosinodalc}{\@pcf@gradocomitetutoralb}
+\newcommand{\@pcf@rfcsinodalc}{}
+\newcommand{\@pcf@institucionsinodalc}{}
+\newcommand{\@pcf@antiguedadunamsinodalc}{}
+\newcommand{\@pcf@correoesinodalc}{}
+\newcommand{\@pcf@telefonosinodalc}{}
+
+\newcommand{\@pcf@sinodald}{}
+\newcommand{\@pcf@gradosinodald}{}
+\newcommand{\@pcf@rfcsinodald}{}
+\newcommand{\@pcf@institucionsinodald}{}
+\newcommand{\@pcf@antiguedadunamsinodald}{}
+\newcommand{\@pcf@correoesinodald}{}
+\newcommand{\@pcf@telefonosinodald}{}
+
+\newcommand{\@pcf@sinodale}{}
+\newcommand{\@pcf@gradosinodale}{}
+\newcommand{\@pcf@rfcsinodale}{}
+\newcommand{\@pcf@institucionsinodale}{}
+\newcommand{\@pcf@antiguedadunamsinodale}{}
+\newcommand{\@pcf@correoesinodale}{}
+\newcommand{\@pcf@telefonosinodale}{}
+
+\newcommand{\@pcf@sinodalf}{}
+\newcommand{\@pcf@sinodalg}{}
+\newcommand{\@pcf@sinodalh}{}
+\newcommand{\@pcf@sinodali}{}
+
+\newcommand{\@pcf@archivobibTeX}{}
+\newcommand{\@pcf@estilobibliografia}{flexbib}
+
+\newcommand*{\@pcf@mesexamen}{\ifcase\month\or
+  Enero\or Febrero\or Marzo \or Abril\or Mayo\or Junio\or
+  Julio\or Agosto\or Septiembre\or Octubre\or Noviembre\or 
+  Diciembre\fi\ }
+
+\newcommand*{\@pcf@anoexamen}{\number\year}
+
+\newcommand*{\@pcf@fechaexamen}{\@pcf@mesexamen, \@pcf@anoexamen}
+
+\newcommand{\@pcf@textolicencia}{Todos los derechos reservados.}
+
+\newcommand{\@pcf@dedicatoria}{}
+\newcommand{\@pcf@agradecimientos}{}
+
+% hay agradecimientos?
+\newif\if@pcf@tieneagradecimientos 
+\@pcf@tieneagradecimientosfalse
+
+% hay dedicatoria?
+\newif\if@pcf@tienededicatoria 
+\@pcf@tienededicatoriafalse
+%
+%    \end{macrocode}
+% Macros para usarse en el documento de tesis
+%    \begin{macrocode}
+
+% comandos que van en el documento
+
+\newcommand{\archivobibTeX}[1]{\renewcommand{\@pcf@archivobibTeX}{#1}}
+\newcommand{\estilobibliografia}[1]{\renewcommand{\@pcf@estilobibliografia}{#1}}
+
+\newcommand{\universidad}[1]{\renewcommand{\@pcf@universidad}{#1}}
+\newcommand{\posgrado}[1]{\renewcommand{\@pcf@posgrado}{#1}}
+\newcommand{\instituto}[1]{\renewcommand{\@pcf@instituto}{#1}}
+\newcommand{\autor}[1]{\renewcommand{\@pcf@autor}{#1}}
+\newcommand{\grado}[1]{\renewcommand{\@pcf@grado}{#1}}
+\newcommand{\numerocuenta}[1]{\renewcommand{\@pcf@numerocuenta}{#1}}
+\newcommand{\planestudios}[1]{\renewcommand{\@pcf@planestudios}{#1}}
+\newcommand{\titulo}[1]{\renewcommand{\@pcf@titulo}{#1}}
+\newcommand{\tituloingles}[1]{\renewcommand{\@pcf@tituloingles}{#1}}
+\newcommand{\coordinador}[1]{\renewcommand{\@pcf@coordinador}{#1}}
+\newcommand{\titulocoordinador}[1]{\renewcommand{\@pcf@titulocoordinador}{#1}}
+\newcommand{\responsableVA}[1]{\renewcommand{\@pcf@responsableVA}{#1}}
+\newcommand{\tituloresponsableVA}[1]{\renewcommand{\@pcf@tituloresponsableVA}{#1}}
+\newcommand{\directorTesis}[1]{\renewcommand{\@pcf@directorTesis}{#1}}
+\newcommand{\gradodirectorTesis}[1]{\renewcommand{\@pcf@gradodirectorTesis}{#1}}
+\newcommand{\comitetutorala}[1]{\renewcommand{\@pcf@comitetutorala}{#1}}
+\newcommand{\gradocomitetutorala}[1]{\renewcommand{\@pcf@gradocomitetutrala}{#1}}
+\newcommand{\comitetutoralb}[1]{\renewcommand{\@pcf@comitetutoralb}{#1}}
+\newcommand{\gradocomitetutoralb}[1]{\renewcommand{\@pcf@gradocomitetutoralb}{#1}}
+
+\newcommand{\sinodala}[1]{\renewcommand{\@pcf@sinodala}{#1}}
+\newcommand{\gradosinodala}[1]{\renewcommand{\@pcf@gradosinodala}{#1}}
+\newcommand{\rfcsinodala}[1]{\renewcommand{\@pcf@rfcsinodala}{#1}}
+\newcommand{\institucionsinodala}[1]{\renewcommand{\@pcf@institucionsinodala}{#1}}
+\newcommand{\antiguedadunamsinodala}[1]{\renewcommand{\@pcf@antiguedadunamsinodala}{#1}}
+\newcommand{\correoesinodala}[1]{\renewcommand{\@pcf@correoesinodala}{#1}}
+\newcommand{\telefonosinodala}[1]{\renewcommand{\@pcf@telefonosinodala}{#1}}
+
+\newcommand{\sinodalb}[1]{\renewcommand{\@pcf@sinodalb}{#1}}
+\newcommand{\gradosinodalb}[1]{\renewcommand{\@pcf@gradosinodalb}{#1}}
+\newcommand{\rfcsinodalb}[1]{\renewcommand{\@pcf@rfcsinodalb}{#1}}
+\newcommand{\institucionsinodalb}[1]{\renewcommand{\@pcf@institucionsinodalb}{#1}}
+\newcommand{\antiguedadunamsinodalb}[1]{\renewcommand{\@pcf@antiguedadunamsinodalb}{#1}}
+\newcommand{\correoesinodalb}[1]{\renewcommand{\@pcf@correoesinodalb}{#1}}
+\newcommand{\telefonosinodalb}[1]{\renewcommand{\@pcf@telefonosinodalb}{#1}}
+
+\newcommand{\sinodalc}[1]{\renewcommand{\@pcf@sinodalc}{#1}}
+\newcommand{\gradosinodalc}[1]{\renewcommand{\@pcf@gradosinodalc}{#1}}
+\newcommand{\rfcsinodalc}[1]{\renewcommand{\@pcf@rfcsinodalc}{#1}}
+\newcommand{\institucionsinodalc}[1]{\renewcommand{\@pcf@institucionsinodalc}{#1}}
+\newcommand{\antiguedadunamsinodalc}[1]{\renewcommand{\@pcf@antiguedadunamsinodalc}{#1}}
+\newcommand{\correoesinodalc}[1]{\renewcommand{\@pcf@correoesinodalc}{#1}}
+\newcommand{\telefonosinodalc}[1]{\renewcommand{\@pcf@telefonosinodalc}{#1}}
+
+\newcommand{\sinodald}[1]{\renewcommand{\@pcf@sinodald}{#1}}
+\newcommand{\gradosinodald}[1]{\renewcommand{\@pcf@gradosinodald}{#1}}
+\newcommand{\rfcsinodald}[1]{\renewcommand{\@pcf@rfcsinodald}{#1}}
+\newcommand{\institucionsinodald}[1]{\renewcommand{\@pcf@institucionsinodald}{#1}}
+\newcommand{\antiguedadunamsinodald}[1]{\renewcommand{\@pcf@antiguedadunamsinodald}{#1}}
+\newcommand{\correoesinodald}[1]{\renewcommand{\@pcf@correoesinodald}{#1}}
+\newcommand{\telefonosinodald}[1]{\renewcommand{\@pcf@telefonosinodald}{#1}}
+
+\newcommand{\sinodale}[1]{\renewcommand{\@pcf@sinodale}{#1}}
+\newcommand{\gradosinodale}[1]{\renewcommand{\@pcf@gradosinodale}{#1}}
+\newcommand{\rfcsinodale}[1]{\renewcommand{\@pcf@rfcsinodale}{#1}}
+\newcommand{\institucionsinodale}[1]{\renewcommand{\@pcf@institucionsinodale}{#1}}
+\newcommand{\antiguedadunamsinodale}[1]{\renewcommand{\@pcf@antiguedadunamsinodale}{#1}}
+\newcommand{\correoesinodale}[1]{\renewcommand{\@pcf@correoesinodale}{#1}}
+\newcommand{\telefonosinodale}[1]{\renewcommand{\@pcf@telefonosinodale}{#1}}
+
+\newcommand{\sinodalf}[1]{\renewcommand{\@pcf@sinodalf}{#1}}
+\newcommand{\sinodalg}[1]{\renewcommand{\@pcf@sinodalg}{#1}}
+\newcommand{\sinodalh}[1]{\renewcommand{\@pcf@sinodalg}{#1}}
+\newcommand{\sinodali}[1]{\renewcommand{\@pcf@sinodalg}{#1}}
+
+\newcommand{\mesexamen}[1]{\renewcommand{\@pcf@mesexamen}{#1}}
+\newcommand{\anoexamen}[1]{\renewcommand{\@pcf@anoexamen}{#1}}
+\newcommand{\fechaexamen}[1]{\renewcommand{\@pcf@fechaexamen}{#1}}
+\newcommand{\textolicencia}[1]{\renewcommand{\@pcf@textolicencia}{#1}}
+
+\newcommand{\dedicatoria}[1]{\@pcf@tienededicatoriatrue\renewcommand{\@pcf@dedicatoria}{#1}}
+\newcommand{\agradecimientos}[1]{\@pcf@tieneagradecimientostrue\renewcommand{\@pcf@agradecimientos}{#1}}
+\newcommand{\resumen}[1]{\renewcommand{\@pcf@resumen}{#1}}
+\newcommand{\abstract}[1]{\renewcommand{\@pcf@abstract}{#1}}
+%    \end{macrocode}
+% Longitudes internas definidas para ayudar al layout.
+%    \begin{macrocode}
+
+
+% Longitudes internas no usadas en el documento
+\newlength{\@pcf@anchopresupuestocaracter}
+\newlength{\@pcf@saltoFirma}
+\newlength{\@pcf@lineaBlanca}
+\newlength{\@pcf@prefacioGapMargenSencillo}
+\newlength{\@pcf@prefacioGapMargenDoble}
+\setlength{\@pcf@anchopresupuestocaracter}{6pt}
+\setlength{\@pcf@lineaBlanca}{\baselineskip}
+\setlength{\@pcf@saltoFirma}{2\@pcf@lineaBlanca} % signature spacing is 2 blank lines
+%
+% Este es el "gap del margen" entre la parte de arriba del
+% papel y texto con espaciado sencillo. Define un margen con
+% un total de 2 in desde arriba.
+\setlength{\@pcf@prefacioGapMargenSencillo}{1in}
+\setlength{\@pcf@prefacioGapMargenDoble}{\@pcf@prefacioGapMargenSencillo}
+\addtolength{\@pcf@prefacioGapMargenDoble}{-\baselineskip}
+
+
+
+\newlength{\AnchoFirma}
+\newlength{\AnchoFirmaLarga}
+\setlength{\AnchoFirma}{4.5cm}
+\setlength{\AnchoFirmaLarga}{7.5cm}
+%
+% \end{macro}
+% Nuevos ambientes definidos 
+%    \begin{macrocode}
+%% Nuevos ambientes
+
+% Introducción 
+\newenvironment{introduccion}{
+\let\@pcf@capitulo\capitulo
+\def\capitulo{\@Alph\c@chapter}
+\if@twocolumn
+\@restonecoltrue\onecolumn
+\else
+\@restonecolfalse
+\fi
+\chapter*{\introductionname
+\chaptermark{\introductionname}\sectionmark{\introductionname}}%
+\ifnum \c@secnumdepth >\m@ne
+\if@mainmatter
+\ClassWarningNoLine{pcftesis}{El ambiente de introducci\'on
+  no deber\'ia de estar dentro de PCFmainmatter.}
+\fi
+\setcounter{chapter}{9}\setcounter{section}{0}% `I'=9
+\typeout{\introductionname.}%
+\addcontentsline{toc}{chapter}
+{\protect\numberline{}\introductionname}%
+\else
+\addcontentsline{toc}{chapter}{\introductionname}%
+\fi
+\if@restonecol\twocolumn\fi
+\thispagestyle{empty}
+}{
+\cleardoublepage
+\setcounter{chapter}{0}
+\setcounter{section}{0}%
+\let\capitulo\@phd@capitulo
+}
+
+% Resumen del capítulo
+\newenvironment{chapterabstract}
+{\normalfont\small\hrulefill~\abstractname~\hrulefill%\bigskip
+\quotation\small}%
+{\endquotation%\bigskip
+\hrule\bigskip\noindent\ignorespaces}
+
+%    \end{macrocode}
+% Traducimos al espa\~nol los operadores trigonom\'etricos y
+% hiperb\'olicos y sus inversos.
+%    \begin{macrocode}
+
+
+% Españolizamos los siguientes operadores matemáticos
+\renewcommand{\sin}{\mathop{\mbox{\normalfont
+      sen}}\nolimits} 
+\renewcommand{\tan}{\mathop{\mbox{\normalfont
+      tg}}\nolimits} 
+\renewcommand{\cot}{\mathop{\mbox{\normalfont
+      ctg}}\nolimits} 
+\renewcommand{\arcsin}{\mathop{\mbox{\normalfont
+      arcsen}}\nolimits} 
+\renewcommand{\arctan}{\mathop{\mbox{\normalfont
+      arctg}}\nolimits} 
+\renewcommand{\sinh}{\mathop{\mbox{\normalfont
+      senh}}\nolimits} 
+\renewcommand{\tanh}{\mathop{\mbox{\normalfont
+      tgh}}\nolimits} 
+
+\newenvironment{cascaronResumen}[1]
+   {\clearpage
+      {
+      \centering
+      \parindent 0pt
+      \MakeUppercase{\abstractname}
+      \vspace{0.5\@pcf@lineaBlanca}\par
+      \hrule
+      \vspace{1\@pcf@lineaBlanca}\par
+      \parbox[t]{5in}{
+        \centering
+        \begin{doublespace}
+            \MakeUppercase{#1}
+        \end{doublespace}
+        \par
+      }%end parbox
+      \vspace{1\@pcf@lineaBlanca}\par
+      \begin{doublespace}
+        {\@pcf@autor}\\
+        {\@pcf@instituto}, {\@pcf@universidad}\\
+        {\@pcf@grado}
+      \end{doublespace}
+      \vspace{1\@pcf@lineaBlanca}\par
+      \par
+    }% end centering
+    \begin{doublespace}
+   }%
+   {%
+   \end{doublespace}%
+   \cleardoublepage
+   }%
+
+
+
+%    \end{macrocode}
+%
+% Páginas definidas para usarse en la tesis.
+% \begin{macrocode}
+%
+
+% Página Edición
+\newcommand{\paginaEdicion}{
+  \clearpage 
+  \thispagestyle{empty}
+  \vspace*{\stretch{1}} 
+  \null %\vfill 
+  \begin{center}
+%    \begin{flushright}
+      \rule[0mm]{4.6cm}{0.2mm} \\
+      Redacción y edición de tesis \\
+      con \LaTeXe, \emph{GNU Emacs} \\
+      y sistema operativo libre \\
+      % \emph{GNU/Linux}.
+      \emph{
+        \raisebox{-0.6ex}{G}
+        \raisebox{-0.1ex}{N}
+        \raisebox{0.3ex}{U}
+        \raisebox{0.0ex}{/}
+        \raisebox{-0.3ex}{L}
+        \raisebox{-0.6ex}{I}
+        \raisebox{-0.2ex}{N}
+        \raisebox{0.3ex}{U}
+        \raisebox{0.6ex}{X}
+        .}
+%    \end{flushright}
+\end{center}
+}
+
+% Letras nuevas para ignorar el tamaño de letra del cuerpo
+% principal de la tesis
+\newcommand{\chica}{\fontsize{11}{11}\selectfont}
+\newcommand{\normal}{\fontsize{12}{11}\selectfont}
+\newcommand{\Normal}{\fontsize{14}{11}\selectfont}
+\newcommand{\grande}{\fontsize{16}{11}\selectfont}
+\newcommand{\Grande}{\fontsize{18}{11}\selectfont}
+\newcommand{\GRANDE}{\fontsize{20}{11}\selectfont}
+
+\providecommand{\Firma}[1]{
+  \noindent
+  \parbox[t]{\AnchoFirma}{%
+    \rule{\AnchoFirma}{0.4pt}
+    \begin{center}
+      {\chica #1}
+    \end{center}
+  }%
+  \par
+}
+
+\providecommand{\FirmaLarga}[1]{
+  \noindent
+  \parbox[t]{\AnchoFirmaLarga}{%
+    \rule{\AnchoFirmaLarga}{0.4pt}
+    \begin{center}
+      {\chica #1}
+    \end{center}
+  }%
+  \par
+}
+
+
+%
+% Página de Firmas del Comité
+\newcommand{\paginaVotoAprobatorio}[7]{%
+  \cleardoublepage
+  \thispagestyle{empty}
+  \normal
+  {
+    \parindent 0pt
+    \includegraphics[width=3cm]{figuras/unam/escudoUNAMbn}% bb = 0 0 152 172 
+    \hspace{8.6cm}
+    \includegraphics[width=2.8cm]{figuras/unam/logo_pcf} %bb = 0 0 632 472
+    
+    \vspace*{\@pcf@prefacioGapMargenDoble}%
+    \vspace{1.0cm}\par
+    \MakeUppercase{\@pcf@responsableVA} \\
+    \MakeUppercase{\@pcf@tituloresponsableVA} \\
+    \MakeUppercase\@pcf@universidad \\
+    PRESENTE \\
+    \vspace{1.0cm}\par
+    \begin{doublespace}
+      Con fecha  \rule{4cm}{0.5pt} 
+      del {\@pcf@anoexamen},
+      le informo que después de haber revisado el trabajo
+      titulado ``\MakeUppercase{\@pcf@titulo}'' presentado por
+      el alumno \MakeUppercase{\@pcf@autor} del
+      {\@pcf@posgrado}, considero que \rule{2.5cm}{0.5pt}  reúne los
+      méritos necesarios para obtener el grado de
+      {\@pcf@grado}.
+    \end{doublespace}
+    \vspace{0.5cm}
+    Atentamente
+
+    \begin{center}
+      \FirmaLarga{#1\, #2}
+    \end{center}
+  
+    \vspace{0.5cm}
+    \begin{doublespace}
+      \chica
+      RFC: \MakeUppercase{\textsc{{#3}}} \\
+      LUGAR DE TRABAJO (ENTIDAD ACADÉMICA Ó INSTITUCIÓN): \\
+      \MakeUppercase{{#4}}
+      \\
+      ANTIGÜEDAD EN LA UNAM: \MakeUppercase{{#5}}\\
+      CORREO-ELCTRÓNICO Y TELÉFONO: {#6}, {#7} 
+    \end{doublespace}
+  }
+  \newpage
+}
+
+
+% Página de aprobación del comité tutoral y solicitud de jurado
+\newcommand{\paginaAprobacionComiteTutoral}{
+    \cleardoublepage
+    \thispagestyle{empty}
+    {
+      \chica
+      \parindent 0pt
+      \vspace{2cm}\par
+      COMITÉ ACADÉMICO \\
+      \MakeUppercase\@pcf@posgrado \\
+      PRESENTE
+      \vspace{1.5cm}\par
+      \begin{doublespace}
+        Por medio de este conducto los abajo firmantes,
+        integrantes del Comité Tutor del alumno(a)
+        \MakeUppercase{\@pcf@autor}, les informamos que hemos
+        revisado el trabajo de {\@pcf@documento} titulado:
+        ``\textsl{\MakeUppercase{\ul{\@pcf@titulo}}}'' y consideramos
+        que es un trabajo terminado, que cumple con todos los
+        elementos para poder solicitar la presentación del
+        examen de grado correspondiente al nivel de {\@pcf@grado}.
+        
+
+        Por tal motivo, proponemos a continuación una lista de
+        posibles sinodales, todos ellos especialistas
+        relacionados con el tema de tesis que se presenta.
+      \end{doublespace}
+     \vspace{0.15cm}\par
+    \begin{minipage}[b]{0.5\linewidth}
+        \begin{itemize}
+        \item {\chica \@pcf@sinodala}
+        \item {\chica \@pcf@sinodalb}
+        \item {\chica \@pcf@sinodalc}
+        \item {\chica \@pcf@sinodald}
+        \item {\chica \@pcf@sinodale}
+        \end{itemize}
+      \end{minipage}
+      \hspace{0.5cm}
+    \begin{minipage}[b]{0.5\linewidth}
+      \begin{itemize}
+        \item {\chica \@pcf@sinodalf}
+        \item {\chica \@pcf@sinodalg}
+        \item {\chica \@pcf@sinodalh}
+        \item {\chica \@pcf@sinodali}
+        \item {\chica }
+        \end{itemize}
+      \end{minipage}
+      \chica
+      \vspace{0.3cm}
+
+      Agradeciendo la atención a la presente se despiden de
+      ustedes
+
+      Atentamente,
+
+      \vspace{1.0cm}\par
+      \begin{minipage}[b]{0.33\linewidth}
+        \Firma{\@pcf@directorTesis\\\emph{Director de Tesis}}
+      \end{minipage}
+      \begin{minipage}[b]{0.33\linewidth}
+        \Firma{\@pcf@comitetutorala\\\emph{Miembro de Comité}}
+      \end{minipage}
+      \begin{minipage}[b]{0.33\linewidth}    
+        \Firma{\@pcf@comitetutoralb\\\emph{Miembro de Comité}}
+      \end{minipage}
+      \vspace{0.5cm}\par
+      \begin{center}
+        \FirmaLarga{\@pcf@autor \\ \@pcf@numerocuenta, Plan
+          {\@pcf@planestudios} \\ \emph{Alumno}}
+      \end{center}
+      
+  }
+    \newpage
+}   
+
+
+% Página del Título        
+\newcommand{\paginaTitulo}{
+    \thispagestyle{empty}
+    { 
+      \begin{tabular}{p{3cm}p{13.0cm}}
+        \includegraphics[width=3cm]{figuras/unam/escudoUNAMbn} %bb = 0 0 152 172
+        \begin{center}
+          \rule[2cm]{1.0mm}{13.5cm}%vertical
+          \hspace{2pt}
+          \rule[0cm]{0.7mm}{15.5cm}%vertical
+          \hspace{2pt}
+          \rule[2cm]{1.0mm}{13.5cm}%vertical
+        \end{center}
+        \includegraphics[width=2.8cm]{figuras/unam/logo_pcf} %bb = 0 0 632 472
+      &
+      \vspace{-3.0cm}
+      \begin{center}
+        {\grande \textsc{\MakeUppercase\expandafter{\@pcf@universidad}}}
+        \\
+        \rule[0mm]{13.0cm}{0.2mm}%horizontal
+        \\
+        \rule[3mm]{13.0cm}{0.7mm}%horizontal
+        \\
+        \vspace{1.0cm}
+        {\Normal \MakeUppercase{\@pcf@posgrado}}
+
+        \vspace{1.0cm}
+
+        {\Grande \textbf{\@pcf@titulo}}
+
+        \vspace*{1.0cm}
+
+        {\grande \textbf{\MakeUppercase{\@pcf@documento}}}\par
+
+        \vspace*{1.0cm}
+        {\normal \textsc{QUE PARA OPTAR POR EL GRADO DE:}}\par
+
+        \vspace*{1.0cm}
+
+        {\Grande \textbf{\MakeUppercase{\@pcf@grado}}}\par
+
+        \vspace*{0.5cm}
+
+        {\normal \textsc{P R E S E N T A:}}\par
+
+        \vspace*{1.cm}
+        {\GRANDE \textbf{\@pcf@autor}} \par
+        \vspace*{2.5cm}
+
+        \chica
+        \textsc{DIRECTOR DE TESIS:}  \@pcf@directorTesis\par
+        \vspace*{0.5cm}
+        \textsc{MIEMBRO DEL COMITÉ TUTORAL:}
+        \@pcf@comitetutorala\par
+        \vspace*{0.5cm}
+        \textsc{MIEMBRO DEL COMITÉ TUTORAL:} \@pcf@comitetutoralb
+        
+
+        \vspace*{2.0cm}
+        \larger{\@pcf@lugar}\hspace*{5cm}{\@pcf@fechaexamen}
+
+      \end{center}
+
+    \end{tabular}}
+  \setcounter{footnote}{0}
+  \cleardoublepage
+  \setcounter{page}{1}
+}
+
+
+% Página de licencia
+\newcommand{\paginaLicencia}{
+  \if@pcf@creativecommons
+     \clearpage 
+     \vspace*{\stretch{1}}       
+     \null %\vfill
+     \begin{center}
+       \includegraphics[height=2cm]{figuras/creative-commons/by-nc-sa-big} % bb =  0 0 411 144
+     \end{center} {\null}
+      El autor, sin perjuicio de la legislación de la
+      Universidad Nacional Autónoma de México, otorga a esta
+      obra la siguiente licencia: 
+
+      Esta obra está licenciada bajo una \textbf{Licencia
+        Atribución-No Comercial-Licenciamiento Recíproco 2.5
+        México} de Creative Commons. Para ver una copia de
+      esta licencia, visite 
+      \begin{center} 
+        \url{http://creativecommons.org/licenses/by-nc-sa/2.5/mx/}
+      \end{center}
+      o envíenos una carta a  
+      \begin{center}
+        \textbf{Creative Commons}\\ 
+        171 Second Street, Suite 300, \\
+        San Francisco, California, \\
+        94105, USA. 
+      \end{center}
+      \cleardoublepage
+  \else
+    \clearpage
+    {
+      \centering
+      \parindent 0pt
+      \vspace*{\fill}
+      \begin{doublespace}
+        
+       Copyright {\copyright} \,\, {\@pcf@autor},\\
+       Ciudad de México, México, \number\year\\
+        {\@pcf@textolicencia}
+      \end{doublespace}
+      \vspace*{\fill}
+      \par
+    } % end centering
+    \cleardoublepage
+  \fi
+}
+
+
+% Página de resumen
+\newcommand{\paginaResumen}{
+  \selectlanguage{spanish}
+  \begin{cascaronResumen}{\@pcf@titulo}
+    \@pcf@resumen
+  \end{cascaronResumen}
+}%
+%
+% Página de abstract
+\newcommand{\paginaAbstract}{%
+  \selectlanguage{english}
+  \begin{cascaronResumen}{\@pcf@tituloingles}
+      \@pcf@abstract
+  \end{cascaronResumen}
+  \selectlanguage{spanish}
+}%
+
+%
+% Página agradecimientos
+\newcommand{\paginaAgradecimientos}{%
+    \clearpage
+    {\centering
+    \parindent 0pt%
+    \vspace*{\@pcf@prefacioGapMargenDoble}%
+    AGRADECIMIENTOS%
+    \vspace{4\@pcf@lineaBlanca}\par
+    \par}% end centering
+    \begin{doublespace}%
+        \@pcf@agradecimientos
+    \end{doublespace}%
+    \cleardoublepage
+}
+% Página dedicatoria
+\newcommand{\paginaDedicatoria}{%
+  \clearpage
+  \vspace*{\stretch{1}} 
+  \begin{center}
+    {\small \textit{ \@pcf@dedicatoria}}
+  \end{center} 
+  \vspace*{\stretch{3}} 
+  \cleardoublepage
+}
+
+\newcommand{\@pcf@paginaSeparador}{%
+  \clearpage
+  \thispagestyle{empty}%
+  {
+    \centering
+    \vspace*{\fill}
+    DESCARTAR ESTA PÁGINA -- ES SOLO UN MARCADOR \\
+    DISCARD THIS PAGE --- IT IS ONLY A MARKER \\
+    \vspace{3\@pcf@lineaBlanca}%
+    Todas las páginas que precedan a esta página se imprimen
+    por un solo lado. \\
+    Todas las páginas subsecuentes se imprimen por ambos lados
+    \vspace*{\fill}
+    \par
+  }% end centering
+  \newpage
+}
+
+
+\newcommand{\@pcf@paginaSeparadorDocs}{%
+  \clearpage
+  \thispagestyle{empty}%
+  {
+    \centering
+    \vspace*{\fill}
+    DESCARTAR ESTA PÁGINA -- ES SOLO UN MARCADOR \\
+    DISCARD THIS PAGE --- IT IS ONLY A MARKER \\
+    \vspace{3\@pcf@lineaBlanca}%
+    Todas las páginas subsecuentes se imprimen por un sólo
+    lado. \\
+  }
+  \noindent  
+  \\
+  \textbf{NO} deben de agregarse a la tesis, son
+  documentos para poder realizar o iniciar el trámite de
+  solicitud de examen de grado en el PCF. 
+  Para más información ver:
+  \begin{center}
+    \url{http://www.posgrado.fisica.unam.mx/egreso.php}
+  \end{center}
+  \vspace*{\fill}
+  \par
+  \newpage
+}
+
+\renewcommand{\maketitle}{
+\ClassWarningNoLine{pcftesis}{\protect\maketitle{} no se
+  puede usar con esta clase, \MessageBreak 
+  usa \protect\PCFfrontmatter{}  en su lugar}
+}
+% \end{macrocode}
+% Por último, creamos nuevos ambientes para |frontmatter|,
+% |mainmatter| y |backmatter|, llamados |PCFfrontmatter|,
+% |PCFmainmatter| y |PCFbackmatter| rspectivamente, se
+% encargan de cierta inicialización principalmente.
+% \begin{macrocode}
+
+
+\newcommand{\PCFfrontmatter}{
+  \frontmatter
+  \setcounter{tocdepth}{1}
+  \begin{singlespace}
+    {%
+      \pagestyle{empty}
+      \paginaTitulo
+      \paginaLicencia
+      \if@pcf@tienededicatoria
+         \paginaDedicatoria
+      \fi
+      \pagestyle{plain}
+      \paginaResumen
+      \paginaAbstract
+      \if@pcf@tieneagradecimientos
+         \paginaAgradecimientos
+      \fi
+        \pagestyle{plain}
+        \tableofcontents
+        \if@pcf@lof
+           \listoffigures
+        \fi
+        \if@pcf@lot
+           \listoftables
+        \fi
+        \if@pcf@separador
+            \@pcf@paginaSeparador
+        \fi
+        \if@pcf@los
+            \printnomenclature
+        \fi
+        \if@pcf@loc
+            \lstlistoflistings        
+        \fi
+        \if@pcf@draft
+        \cleardoublepage
+        \listoftodos
+        \cleardoublepage
+        \listoffixmes
+        \fi
+    }
+  \end{singlespace}
+}
+
+\newcommand{\PCFmainmatter}{
+  \mainmatter
+  \if@pcf@encabalternados
+      \renewcommand{\headrulewidth}{0.3pt}
+      \renewcommand{\footrulewidth}{0pt}
+      \fancyhead[RO]{{\footnotesize\rightmark}\hspace{2em}\thepage}
+      \fancyhead[LE]{\thepage\hspace{2em}\footnotesize{\leftmark}}
+      \fancyhead[RE,LO]{}
+      \fancyhead[RO]{{\footnotesize\rightmark}\hspace{2em}\thepage}
+  \fi
+  \if@pcf@encabcentrados
+      \fancyhead[CO]{\footnotesize{\rightmark}}
+      \fancyhead[CE]{\footnotesize{\leftmark}}
+      \fancyfoot[CE,CO]{\thepage}
+  \fi
+  \if@pcf@noencab
+      \fancyfoot[CE,CO]{\thepage}
+  \fi
+  \pagestyle{fancy}
+  \pagenumbering{arabic}
+  \cleardoublepage
+  \bibliographystyle{\@pcf@estilobibliografia}
+}
+
+\newcommand{\PCFbackmatter}{
+  \backmatter
+  
+  \renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{##1}}{}}
+  \renewcommand{\sectionmark}[1]{\markright{\MakeUppercase{##1}}{}}
+  \if@pcf@encabalternados
+      \renewcommand{\headrulewidth}{0pt}
+      \fancyhead[LE]{\thepage\hspace{2em}\footnotesize{\leftmark}}
+      \fancyhead[RE,LO]{}
+      \fancyhead[RO]{{\footnotesize\leftmark}\hspace{2em}\thepage}
+  \fi
+  \if@pcf@encabcentrados
+      \renewcommand{\headrulewidth}{0pt}
+      \fancyhead[CE,CO]{\footnotesize{\leftmark}}
+      \fancyhead[RE,LO]{}
+      \fancyhead[RO]{\footnotesize{\leftmark}}
+      \fancyfoot[CE,CO]{\thepage}
+  \fi
+
+  \cleardoublepage
+  % Renombrando los comandos para que aparezca diferente el nombre
+  \renewcommand{\bibname}{Bibliografía}
+  \renewcommand{\refname}{Bibliografía}
+  % Ajustamos los encabezados
+  \pagestyle{plain}
+
+
+  {\bibliography{\@pcf@archivobibTeX}} % *.bib = Archivos
+  \if@pcf@index
+      \printindex
+  \fi
+  \if@pcf@emacs
+      \paginaEdicion
+  \else
+      \ClassWarningNoLine{pcftesis}{Si estas usando
+        GNU/Emacs deber\'ias de mostrar gratitud colocando la
+        opci\'on ``emacs'' en \protect\documentclass ; si no
+        lo usas, has perdido la oportunidad de que tu vida
+        sea mas f\'acil...}
+  \fi
+}
+
+\newcommand{\PCFapendices}{
+  
+  \renewcommand{\chaptermark}[1]{%
+    \markboth{\MakeUppercase{\appendixname\ \thechapter}}%
+    {\MakeUppercase{##1}}
+  }
+
+  \renewcommand{\appendixtocname}{Lista de Apéndices}
+  \appendix
+  
+  % Nos aseguramos que no haya numeracion despues de esta linea
+  \noappendicestocpagenum
+
+  % Agregamos una nueva entrada al TOC que diga Apéndices
+  % (ver renovación de comando en la línea 12)
+  \addappheadtotoc
+}
+
+\AtBeginDocument{%
+  \renewcommand{\contentsname}{Tabla de Contenidos}
+  \renewcommand{\listfigurename}{Lista de Figuras}
+  \renewcommand{\listtablename}{Lista de Tablas}
+  \renewcommand\bibname{Bibliografía}
+  \renewcommand\indexname{Glosario}
+  \renewcommand\figurename{Figura}
+  \renewcommand\tablename{Tabla}
+  \renewcommand\partname{Parte}
+  \renewcommand\appendixname{Apéndice}
+  \renewcommand\abstractname{Resumen}
+  \providecommand*\conclusionsname{Conclusiones}
+  \providecommand*\introductionname{Introducción}
+
+
+  \fancypagestyle{plain}{%
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+  }
+
+  \pagestyle{plain}
+  
+  \if@pcf@interlineadosencillo
+  \begin{singlespace}
+  \fi
+
+  \if@pcf@interlineadodoble
+  \begin{doublespace}
+  \fi
+
+  \if@pcf@interlineadounoymedio
+  \begin{onehalfspacing}
+  \fi
+
+  
+  % Dutch style es decir, sin indentación
+  \setlength{\parskip}{1.3ex plus 0.2ex minus 0.2ex}
+  \setlength{\parindent}{0pt}
+
+}
+
+
+\AtEndDocument{%
+  \if@pcf@interlineadosencillo
+  \end{singlespace}
+  \fi
+
+  \if@pcf@interlineadodoble
+  \end{doublespace}
+  \fi
+
+  \if@pcf@interlineadounoymedio
+  \end{onehalfspacing}
+  \fi
+  \if@pcf@docs
+      \@pcf@paginaSeparadorDocs
+      \paginaAprobacionComiteTutoral
+      \paginaVotoAprobatorio{\@pcf@gradosinodala}{\@pcf@sinodala}{\@pcf@rfcsinodala}{\@pcf@institucionsinodala}{\@pcf@antiguedadunamsinodala}
+      {\@pcf@correoesinodala}{\@pcf@telefonosinodala}
+      \paginaVotoAprobatorio{\@pcf@gradosinodalb}{\@pcf@sinodalb}{\@pcf@rfcsinodalb}{\@pcf@institucionsinodalb}{\@pcf@antiguedadunamsinodalb}
+      {\@pcf@correoesinodalb}{\@pcf@telefonosinodalb}
+      \paginaVotoAprobatorio{\@pcf@gradosinodalc}{\@pcf@sinodalc}{\@pcf@rfcsinodalc}{\@pcf@institucionsinodalc}{\@pcf@antiguedadunamsinodalc}
+      {\@pcf@correoesinodalc}{\@pcf@telefonosinodalc}
+      \paginaVotoAprobatorio{\@pcf@gradosinodald}{\@pcf@sinodald}{\@pcf@rfcsinodald}{\@pcf@institucionsinodald}{\@pcf@antiguedadunamsinodald}
+      {\@pcf@correoesinodald}{\@pcf@telefonosinodald}
+      \paginaVotoAprobatorio{\@pcf@gradosinodale}{\@pcf@sinodale}{\@pcf@rfcsinodale}{\@pcf@institucionsinodale}{\@pcf@antiguedadunamsinodale}
+      {\@pcf@correoesinodale}{\@pcf@telefonosinodale}
+
+  \fi
+
+}%
+
+% \end{macrocode}
+% \endinput
+% End of file `pcftesis.cls'.
+%    \end{macrocode}
+%%
+% \iffalse
+%</class>
+% \fi
+%
+% \iffalse
+%<*template>
+\documentclass[emacs, docs, listas, encabcentrados, adornado, 12pt]{pcftesis}
+
+\def\archivos{capitulo_1,capitulo_2}
+
+\includeonly{\archivos}
+
+\titulo{Sobre porqué Einstein estaba equivocado}
+\tituloingles{On why Einstein was wrong}
+
+\autor{Crack d'Pot}
+\planestudios{5009}
+\numerocuenta{309999666}
+
+\directorTesis{Batman}
+\comitetutorala{Peter Parker}
+\comitetutoralb{Red Richards}
+
+\responsableVA{Dr. Isidro Ávila Martínez}
+\tituloresponsableVA{Director General de Administración Escolar}
+ 
+\mesexamen{Abril}
+
+\resumen{¡Batman es un científico! \\ Homero J. Simpson}
+
+\abstract{This thesis presents (synonym of new)  method for
+  (sciency verb) the (noun few people have heard of). Using
+  (something you didn't invent), the (property) was measured
+  to be (number) $\pm$ (number) (units). Results show (sexy
+  adjective) agreement with theoretical predictions  and
+  significant improvement  over previously  efforts by
+  (Loser), et al. The work presented here has profounds
+  implications for future studies of (buzz word) and may
+  one day help solve the problem of (supreme sociological
+  concern)\footnote{Obtenido de {http://phdcomics.com}.}}
+
+\agradecimientos{Quiero agradecer a la iluminación dada por
+  los dioses estos últimos meses $\ldots$}
+
+
+\dedicatoria{Para aquellos que no creían que lo lograría \\
+ (y que se fueron acumulando con el tiempo)}
+
+\archivobibTeX{tesis}
+\estilobibliografia{apalike}
+
+\begin{document}
+\PCFfrontmatter % Portada, listas, agradecimientos y resumenes
+\PCFmainmatter  % Cuerpo principal de la tesis
+\include{capitulo_1}
+\include{capitulo_2}
+%\include{capitulo_3}
+\PCFapendices   % Inicio de apéndices
+\input{apendice_a}
+\include{apendice_b}
+\PCFbackmatter  % Bibliografía, índice analítico, etc
+\end{document}
+%</template>
+% \fi
+%%
+% \Finale
+\endinput
+%% End of file : pcftesis.dtx

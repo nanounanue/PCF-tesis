@@ -1,0 +1,92 @@
+%%
+%%   Copyright (C) 2009 by  Adolfo De Unánue T.
+%%
+%%    This file is part of pcftesis.
+%%
+%%     pcftesis is free software: you can redistribute it and/or modify
+%%     it under the terms of the GNU General Public License as published by
+%%     the Free Software Foundation, either version 3 of the License, or
+%%     (at your option) any later version.
+%%
+%%     pcftesis is distributed in the hope that it will be useful,
+%%     but WITHOUT ANY WARRANTY; without even the implied warranty of
+%%     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%%     GNU General Public License for more details.
+%%
+%%     You should have received a copy of the GNU General Public License
+%%     along with pcftesis.  If not, see <http://www.gnu.org/licenses/>.
+
+
+\input docstrip.tex
+\keepsilent
+\usedir{tex/latex/pcftesis}
+
+\preamble
+Este es un archivo generado automáticamente
+Copyright (C) 2009  by Adolfo De Unánue T.
+
+This file is part of pcftesis.
+
+pcftesis is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+pcftesis is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with pcftesis.  If not, see <http://www.gnu.org/licenses/>.
+
+==============================================================
+
+Clase para la generación de tesis del Posgrado en Ciencias
+Físicas de la UNAM, Ciudad de México hecho por 
+Adolfo De Unánue Tiscareño.
+
+Por favor envía mejoras o dudas a :
+adolfo@nucleares.unam.mx
+
+Para obtener la documentación sobre como usar la clase
+pcftesis procesa el archivo pcftesis.dtx con LaTeX.
+
+==============================================================
+
+\endpreamble
+%
+
+\askforoverwritefalse
+
+\generate{%
+    \file{pcftesis.cls}{\from{pcftesis.dtx}{class}}%
+    \file{cascaron.tex}{\from{pcftesis.dtx}{template}}%
+}%
+
+\obeyspaces
+
+\Msg{********************************************************}
+\Msg{*                                                      *}
+\Msg{* Para finalizar la instalación debes de mover         *}
+\Msg{* los siguientes archivos al directorio en el cual     *}
+\Msg{* vayas a trabajar en tu tesis:                        *}
+\Msg{*                                                      *}
+\Msg{* \space\space pcf_unam.cls }
+\Msg{* \space\space Makefile     }
+\Msg{* \space\space todonotes.sty}
+\Msg{* \space\space changes.sty  }
+\Msg{*                                                      *}
+\Msg{* y la carpeta                                         *}
+\Msg{*                                                      *}
+\Msg{* \space\space figuras                                 *}
+\Msg{*                                                      *}
+\Msg{* Para producir la documentación  y el cascaron ejecuta*}
+\Msg{* el archivo pcf_unam.dtx usando LaTeX.                *}
+\Msg{*                                                      *}
+\Msg{* ¡Buena suerte en tu tesis!                           *}
+\Msg{********************************************************}
+
+\endbatchfile
+
+%% End of the file : pcftesis.ins
